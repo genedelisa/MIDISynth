@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B08053BA1C6777D40018095B /* FluidR3 GM2-2.SF2 in Resources */ = {isa = PBXBuildFile; fileRef = B08053B91C6777D40018095B /* FluidR3 GM2-2.SF2 */; };
+		B08053BC1C67793E0018095B /* chromatic2.mid in Resources */ = {isa = PBXBuildFile; fileRef = B08053BB1C67793E0018095B /* chromatic2.mid */; };
+		B08053BE1C677FF90018095B /* The Legend of Zelda - Koji Kondo - Main Theme (King Meteor).mid in Resources */ = {isa = PBXBuildFile; fileRef = B08053BD1C677FF90018095B /* The Legend of Zelda - Koji Kondo - Main Theme (King Meteor).mid */; };
+		B08053C01C67811E0018095B /* AudioUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08053BF1C67811E0018095B /* AudioUtils.swift */; };
+		B0BD4E431C66312400B84077 /* AudioUnitMIDISynth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BD4E421C66312400B84077 /* AudioUnitMIDISynth.swift */; };
+		B0BD4E4D1C6695F900B84077 /* AVAudioUnitMIDISynth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BD4E4C1C6695F900B84077 /* AVAudioUnitMIDISynth.swift */; };
+		B0BD4E4F1C66975100B84077 /* SynthSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BD4E4E1C66975100B84077 /* SynthSequence.swift */; };
 		B0E9F6B41B5D52950035EEBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E9F6B31B5D52950035EEBA /* AppDelegate.swift */; };
 		B0E9F6B61B5D52950035EEBA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E9F6B51B5D52950035EEBA /* ViewController.swift */; };
 		B0E9F6B91B5D52950035EEBA /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = B0E9F6B81B5D52950035EEBA /* README.md */; };
@@ -17,6 +24,8 @@
 		B0E9F6C41B5D52950035EEBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0E9F6C31B5D52950035EEBA /* Assets.xcassets */; };
 		B0E9F6C71B5D52950035EEBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0E9F6C51B5D52950035EEBA /* LaunchScreen.storyboard */; };
 		B0E9F6D21B5D52950035EEBA /* MIDISynthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E9F6D11B5D52950035EEBA /* MIDISynthTests.swift */; };
+		B0E9F6DF1B5D55550035EEBA /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0E9F6DE1B5D55550035EEBA /* CoreAudio.framework */; };
+		B0E9F6E11B5D55600035EEBA /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0E9F6E01B5D55600035EEBA /* CoreMIDI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,6 +39,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B08053B91C6777D40018095B /* FluidR3 GM2-2.SF2 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FluidR3 GM2-2.SF2"; path = "../../AVAudioUnitSamplerFrobs/AVAudioUnitSamplerFrobs/FluidR3 GM2-2.SF2"; sourceTree = "<group>"; };
+		B08053BB1C67793E0018095B /* chromatic2.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; name = chromatic2.mid; path = ../../AVAudioUnitSamplerFrobs/AVAudioUnitSamplerFrobs/chromatic2.mid; sourceTree = "<group>"; };
+		B08053BD1C677FF90018095B /* The Legend of Zelda - Koji Kondo - Main Theme (King Meteor).mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; name = "The Legend of Zelda - Koji Kondo - Main Theme (King Meteor).mid"; path = "../../../../../../Downloads/Soundfont/arachno-soundfont-10-sf2/MIDI Files/Covers/Games/The Legend of Zelda - Koji Kondo - Main Theme (King Meteor).mid"; sourceTree = "<group>"; };
+		B08053BF1C67811E0018095B /* AudioUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioUtils.swift; sourceTree = "<group>"; };
+		B0BD4E421C66312400B84077 /* AudioUnitMIDISynth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioUnitMIDISynth.swift; sourceTree = "<group>"; };
+		B0BD4E4C1C6695F900B84077 /* AVAudioUnitMIDISynth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioUnitMIDISynth.swift; sourceTree = "<group>"; };
+		B0BD4E4E1C66975100B84077 /* SynthSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynthSequence.swift; sourceTree = "<group>"; };
 		B0E9F6B01B5D52950035EEBA /* MIDISynth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MIDISynth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0E9F6B31B5D52950035EEBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B0E9F6B51B5D52950035EEBA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -44,6 +60,8 @@
 		B0E9F6CD1B5D52950035EEBA /* MIDISynthTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MIDISynthTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0E9F6D11B5D52950035EEBA /* MIDISynthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDISynthTests.swift; sourceTree = "<group>"; };
 		B0E9F6D31B5D52950035EEBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B0E9F6DE1B5D55550035EEBA /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		B0E9F6E01B5D55600035EEBA /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +69,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0E9F6E11B5D55600035EEBA /* CoreMIDI.framework in Frameworks */,
+				B0E9F6DF1B5D55550035EEBA /* CoreAudio.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,9 +84,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B05022FB1C68E9B200ACED32 /* media */ = {
+			isa = PBXGroup;
+			children = (
+				B08053BD1C677FF90018095B /* The Legend of Zelda - Koji Kondo - Main Theme (King Meteor).mid */,
+				B08053BB1C67793E0018095B /* chromatic2.mid */,
+				B08053B91C6777D40018095B /* FluidR3 GM2-2.SF2 */,
+			);
+			name = media;
+			sourceTree = "<group>";
+		};
 		B0E9F6A71B5D52940035EEBA = {
 			isa = PBXGroup;
 			children = (
+				B0E9F6E01B5D55600035EEBA /* CoreMIDI.framework */,
+				B0E9F6DE1B5D55550035EEBA /* CoreAudio.framework */,
 				B0E9F6B21B5D52950035EEBA /* MIDISynth */,
 				B0E9F6D01B5D52950035EEBA /* MIDISynthTests */,
 				B0E9F6B11B5D52950035EEBA /* Products */,
@@ -85,6 +117,7 @@
 		B0E9F6B21B5D52950035EEBA /* MIDISynth */ = {
 			isa = PBXGroup;
 			children = (
+				B05022FB1C68E9B200ACED32 /* media */,
 				B0E9F6B31B5D52950035EEBA /* AppDelegate.swift */,
 				B0E9F6B51B5D52950035EEBA /* ViewController.swift */,
 				B0E9F6C01B5D52950035EEBA /* Main.storyboard */,
@@ -92,6 +125,10 @@
 				B0E9F6C51B5D52950035EEBA /* LaunchScreen.storyboard */,
 				B0E9F6C81B5D52950035EEBA /* Info.plist */,
 				B0E9F6B71B5D52950035EEBA /* Supporting Files */,
+				B0BD4E421C66312400B84077 /* AudioUnitMIDISynth.swift */,
+				B0BD4E4C1C6695F900B84077 /* AVAudioUnitMIDISynth.swift */,
+				B0BD4E4E1C66975100B84077 /* SynthSequence.swift */,
+				B08053BF1C67811E0018095B /* AudioUtils.swift */,
 			);
 			path = MIDISynth;
 			sourceTree = "<group>";
@@ -196,12 +233,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B08053BA1C6777D40018095B /* FluidR3 GM2-2.SF2 in Resources */,
 				B0E9F6BF1B5D52950035EEBA /* .travis.yml in Resources */,
 				B0E9F6BD1B5D52950035EEBA /* .gitignore in Resources */,
 				B0E9F6BB1B5D52950035EEBA /* LICENSE in Resources */,
+				B08053BE1C677FF90018095B /* The Legend of Zelda - Koji Kondo - Main Theme (King Meteor).mid in Resources */,
 				B0E9F6C71B5D52950035EEBA /* LaunchScreen.storyboard in Resources */,
 				B0E9F6C21B5D52950035EEBA /* Main.storyboard in Resources */,
 				B0E9F6C41B5D52950035EEBA /* Assets.xcassets in Resources */,
+				B08053BC1C67793E0018095B /* chromatic2.mid in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,9 +259,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0BD4E4F1C66975100B84077 /* SynthSequence.swift in Sources */,
+				B0BD4E431C66312400B84077 /* AudioUnitMIDISynth.swift in Sources */,
 				B0E9F6B91B5D52950035EEBA /* README.md in Sources */,
 				B0E9F6B61B5D52950035EEBA /* ViewController.swift in Sources */,
 				B0E9F6B41B5D52950035EEBA /* AppDelegate.swift in Sources */,
+				B0BD4E4D1C6695F900B84077 /* AVAudioUnitMIDISynth.swift in Sources */,
+				B08053C01C67811E0018095B /* AudioUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +455,7 @@
 				B0E9F6D81B5D52950035EEBA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B0E9F6D91B5D52950035EEBA /* Build configuration list for PBXNativeTarget "MIDISynthTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +464,7 @@
 				B0E9F6DB1B5D52950035EEBA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

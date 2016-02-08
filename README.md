@@ -2,11 +2,11 @@
 
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://en.wikipedia.org/wiki/MIT_License)
-[![Build Status](https://travis-ci.org/genedelisa/TableBinding.svg)](https://travis-ci.org/genedelisa/MIDISynth)
-[![GitHub tag](https://img.shields.io/github/tag/genedelisa/tablebinding.svg)](https://github.com/genedelisa/MIDISynth/)
-[![GitHub release](https://img.shields.io/github/release/genedelisa/tablebinding.svg)](https://github.com/genedelisa/MIDISynth/)
+[![Build Status](https://travis-ci.org/genedelisa/MIDISynth.svg)](https://travis-ci.org/genedelisa/MIDISynth)
+[![GitHub tag](https://img.shields.io/github/tag/genedelisa/MIDISynth.svg)](https://github.com/genedelisa/MIDISynth/)
+[![GitHub release](https://img.shields.io/github/release/genedelisa/MIDISynth.svg)](https://github.com/genedelisa/MIDISynth/)
 
-An example using
+An example using the multitimbral `kAudioUnitSubType_MIDISynth` in Core Audio, and wrapped as an `AVAudioUnit` to use with AVFoundation's `AVAudioEngine`. The sampler av audio unit that is part of AVFoundation is not multitimbral.
 
 
 ## Blog post for this example.
@@ -17,7 +17,7 @@ An example using
 ## Bugs
 
 
-[![GitHub issues](https://img.shields.io/github/issues/genedelisa/tablebinding.svg)](https://github.com/genedelisa/MIDISynth/issues)
+[![GitHub issues](https://img.shields.io/github/issues/genedelisa/MIDISynth.svg)](https://github.com/genedelisa/MIDISynth/issues)
 
 If you find one, [please add it to issues](https://github.com/genedelisa/MIDISynth/issues)
 

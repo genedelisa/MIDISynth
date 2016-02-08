@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MIDISynth" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,7 +15,48 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="NzE-Wn-I3i">
+                                <rect key="frame" x="266" y="255" width="90" height="120"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hiY-e1-aNl">
+                                        <rect key="frame" x="0.0" y="0.0" width="90" height="30"/>
+                                        <state key="normal" title="Patch 1"/>
+                                        <connections>
+                                            <action selector="patch1Off:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nd8-jG-lRW"/>
+                                            <action selector="patch1On:" destination="BYZ-38-t0r" eventType="touchDown" id="q7a-mm-Twc"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NLt-cw-HI6">
+                                        <rect key="frame" x="0.0" y="30" width="90" height="30"/>
+                                        <state key="normal" title="Patch 2"/>
+                                        <connections>
+                                            <action selector="patch2Off:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ffJ-K0-ozP"/>
+                                            <action selector="patch2On:" destination="BYZ-38-t0r" eventType="touchDown" id="E7Z-vr-8TL"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8gw-vR-dWM">
+                                        <rect key="frame" x="0.0" y="60" width="90" height="30"/>
+                                        <state key="normal" title="Sequence"/>
+                                        <connections>
+                                            <action selector="playSequence:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aj6-7H-tDl"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zUH-SG-WP5">
+                                        <rect key="frame" x="0.0" y="90" width="90" height="30"/>
+                                        <state key="normal" title="AV sequence"/>
+                                        <connections>
+                                            <action selector="playSS:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LdS-Sg-7C8"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="NzE-Wn-I3i" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="BF9-hk-7tk"/>
+                            <constraint firstItem="NzE-Wn-I3i" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hSb-yL-9vB"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

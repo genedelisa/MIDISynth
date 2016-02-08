@@ -1,5 +1,8 @@
 # Created by https://www.gitignore.io
 
+*.SF
+*.SF2
+
 ### Xcode ###
 build/
 *.pbxuser
