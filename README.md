@@ -8,6 +8,11 @@
 
 An example using the multitimbral `kAudioUnitSubType_MIDISynth` in Core Audio, and wrapped as an `AVAudioUnit` to use with AVFoundation's `AVAudioEngine`. The sampler av audio unit that is part of AVFoundation is not multitimbral.
 
+## SoundFont
+
+I've not included a SoundFont to avoid any "legal" issues. You will need to find one and update the name in the source code.
+
+
 
 ## Blog post for this example.
 
