@@ -1,0 +1,6 @@
+line_length:
+  - 120 # warning
+  - 500 # error
+
+disabled_rules:
+   - trailing_newline

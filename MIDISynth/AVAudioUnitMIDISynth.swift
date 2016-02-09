@@ -15,6 +15,25 @@ enum AVAudioUnitMIDISynthError: ErrorType {
     case BadSoundFont
 }
 
+/**
+
+ A multi-timbral implementation of AVAudioUnitMIDIInstrument as an AVAudioUnit.
+ 
+ 
+ - author: Gene De Lisa
+ 
+ - requires: AVFoundation
+ 
+ - seealso:
+ [The Swift Standard Library Reference](https://developer.apple.com/library/prerelease/ios//documentation/General/Reference/SwiftStandardLibraryReference/index.html)
+
+ - seealso:
+ [Constructing Audio Unit Apps](https://developer.apple.com/library/ios/documentation/MusicAudio/Conceptual/AudioUnitHostingGuide_iOS/ConstructingAudioUnitApps/ConstructingAudioUnitApps.html)
+
+ - seealso:
+ [Audio Unit Reference](https://developer.apple.com/library/ios/documentation/AudioUnit/Reference/AudioUnit_Framework/index.html)
+
+*/
 
 class AVAudioUnitMIDISynth: AVAudioUnitMIDIInstrument {
     
@@ -76,7 +95,7 @@ class AVAudioUnitMIDISynth: AVAudioUnitMIDIInstrument {
      Then you turn kAUMIDISynthProperty_EnablePreload off. It is now in a state where it will respond to MIDI program
      change messages and switch to the already cached instrument data.
      
-     precondition: the graph must be initialized
+     - precondition: the graph must be initialized
      */
     
     func loadPatches(patches:[UInt32]) throws {
