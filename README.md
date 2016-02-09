@@ -5,6 +5,8 @@
 [![Build Status](https://travis-ci.org/genedelisa/MIDISynth.svg)](https://travis-ci.org/genedelisa/MIDISynth)
 [![GitHub tag](https://img.shields.io/github/tag/genedelisa/MIDISynth.svg)](https://github.com/genedelisa/MIDISynth/)
 [![GitHub release](https://img.shields.io/github/release/genedelisa/MIDISynth.svg)](https://github.com/genedelisa/MIDISynth/)
+[![Swift 2](https://img.shields.io/badge/swift2-compatible-4BC51D.svg?style=flat")](https://developer.apple.com/swift)
+
 
 An example using the multitimbral `kAudioUnitSubType_MIDISynth` in Core Audio, and wrapped as an `AVAudioUnit` to use with AVFoundation's `AVAudioEngine`. The sampler av audio unit that is part of AVFoundation is not multitimbral.
 
