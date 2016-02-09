@@ -11,12 +11,13 @@ An example using the multitimbral `kAudioUnitSubType_MIDISynth` in Core Audio, a
 ## SoundFont
 
 I've not included a SoundFont to avoid any "legal" issues. You will need to find one and update the name in the source code.
+I've used SoundFonts from [MuseScore](https://musescore.org/en/handbook/soundfonts).
 
 
 
 ## Blog post for this example.
 
-[Blog post](http://www.rockhoppertech.com/blog/)
+[Blog post](http://www.rockhoppertech.com/blog/multi-timbral-avaudiounitmidiinstrument/)
 
 
 ## Bugs

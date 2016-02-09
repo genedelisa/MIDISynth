@@ -59,13 +59,14 @@ class AudioUnitMIDISynth : NSObject {
         
         status = AUGraphNodeInfo(self.processingGraph, self.ioNode, nil, &ioUnit)
         AudioUtils.CheckError(status)
-        
-        let ioUnitOutputElement:AudioUnitElement = 0
+
+
         let synthOutputElement:AudioUnitElement = 0
+        let ioUnitInputElement:AudioUnitElement = 0
         
         status = AUGraphConnectNodeInput(self.processingGraph,
-            self.midisynthNode, synthOutputElement, // srcnode, inSourceOutputNumber
-            self.ioNode, ioUnitOutputElement) // destnode, inDestInputNumber
+            self.midisynthNode, synthOutputElement, // srcnode, SourceOutputNumber
+            self.ioNode, ioUnitInputElement) // destnode, DestInputNumber
         
         AudioUtils.CheckError(status)
     }

@@ -16,7 +16,6 @@
 		B0BD4E4F1C66975100B84077 /* SynthSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BD4E4E1C66975100B84077 /* SynthSequence.swift */; };
 		B0E9F6B41B5D52950035EEBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E9F6B31B5D52950035EEBA /* AppDelegate.swift */; };
 		B0E9F6B61B5D52950035EEBA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E9F6B51B5D52950035EEBA /* ViewController.swift */; };
-		B0E9F6B91B5D52950035EEBA /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = B0E9F6B81B5D52950035EEBA /* README.md */; };
 		B0E9F6BB1B5D52950035EEBA /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B0E9F6BA1B5D52950035EEBA /* LICENSE */; };
 		B0E9F6BD1B5D52950035EEBA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = B0E9F6BC1B5D52950035EEBA /* .gitignore */; };
 		B0E9F6BF1B5D52950035EEBA /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = B0E9F6BE1B5D52950035EEBA /* .travis.yml */; };
@@ -261,7 +260,6 @@
 			files = (
 				B0BD4E4F1C66975100B84077 /* SynthSequence.swift in Sources */,
 				B0BD4E431C66312400B84077 /* AudioUnitMIDISynth.swift in Sources */,
-				B0E9F6B91B5D52950035EEBA /* README.md in Sources */,
 				B0E9F6B61B5D52950035EEBA /* ViewController.swift in Sources */,
 				B0E9F6B41B5D52950035EEBA /* AppDelegate.swift in Sources */,
 				B0BD4E4D1C6695F900B84077 /* AVAudioUnitMIDISynth.swift in Sources */,

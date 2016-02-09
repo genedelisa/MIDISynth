@@ -31,20 +31,20 @@ class AVAudioUnitMIDISynth: AVAudioUnitMIDIInstrument {
     
     func loadMIDISynthSoundFont()  {
         
-        if var bankURL = NSBundle.mainBundle().URLForResource("FluidR3 GM2-2", withExtension: "SF2")  {
-            //loadMIDISynthSoundFont(bankURL)
+        if let bankURL = NSBundle.mainBundle().URLForResource("FluidR3 GM2-2", withExtension: "SF2")  {
+            loadMIDISynthSoundFont(bankURL)
             
-            let status = AudioUnitSetProperty(
-                self.audioUnit,
-                AudioUnitPropertyID(kMusicDeviceProperty_SoundBankURL),
-                AudioUnitScope(kAudioUnitScope_Global),
-                0,
-                &bankURL,
-                UInt32(sizeof(bankURL.dynamicType)))
-            
-            if status != OSStatus(noErr) {
-                print("error \(status)")
-            }
+//            let status = AudioUnitSetProperty(
+//                self.audioUnit,
+//                AudioUnitPropertyID(kMusicDeviceProperty_SoundBankURL),
+//                AudioUnitScope(kAudioUnitScope_Global),
+//                0,
+//                &bankURL,
+//                UInt32(sizeof(bankURL.dynamicType)))
+//            
+//            if status != OSStatus(noErr) {
+//                print("error \(status)")
+//            }
         } else {
             print("Could not load sound font")
         }

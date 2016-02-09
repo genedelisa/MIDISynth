@@ -85,11 +85,6 @@ public class AudioUtils {
     class func stringFrom4(status: OSStatus) -> String {
         let n = Int(status)
         return stringFrom4(n)
-        //        var s: String = String (UnicodeScalar((n >> 24) & 255))
-        //        s.append(UnicodeScalar((n >> 16) & 255))
-        //        s.append(UnicodeScalar((n >> 8) & 255))
-        //        s.append(UnicodeScalar(n & 255))
-        //        return (s)
     }
     
     class func valueFromString4(s: String) -> Int {
@@ -131,17 +126,14 @@ public class AudioUtils {
     print("no error")
     return
     }
-    print("no error \(error)")
+    print("error \(error)")
     }
     #elseif os(iOS)
     class func CheckError(error:OSStatus) {
         
         if error == noErr {
-            print("no error")
             return
         }
-        
-       
         
         let s = stringFrom4(error)
         print("error chars '\(s)'")

@@ -53,7 +53,8 @@ class SynthSequence : NSObject {
 
         
         patches.append(0)
-        patches.append(46)
+        patches.append(46) //harp
+        
         // must be after the engine has started. Otherwise you will get  kAudioUnitErr_Uninitialized
         do {
             try midiSynth.loadPatches(patches)
@@ -68,13 +69,12 @@ class SynthSequence : NSObject {
 
         
         setupSequencer()
-//        setupSequencerFile()
+// or       setupSequencerFile()
         
         print(self.engine)
         
         // since we have created an AVAudioSequencer, the engine's musicSequence is set.
         CAShow(UnsafeMutablePointer<MusicSequence>(engine.musicSequence))
-
         
         setSessionPlayback()
         
@@ -129,8 +129,6 @@ class SynthSequence : NSObject {
                 return
             }
         }
-        
-        
         
         sequencer.prepareToPlay()
         print(sequencer)
