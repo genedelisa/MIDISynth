@@ -3,7 +3,7 @@
 *.SF
 *.SF2
 
-docs/swiftDocs
+docs/swiftDocs/*
 
 ### Xcode ###
 build/

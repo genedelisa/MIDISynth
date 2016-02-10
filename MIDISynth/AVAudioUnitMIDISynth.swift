@@ -10,11 +10,9 @@ import Foundation
 import AVFoundation
 
 
-
 /**
 
  A multi-timbral implementation of AVAudioUnitMIDIInstrument as an AVAudioUnit.
- 
  
  - author: Gene De Lisa
  
@@ -44,35 +42,20 @@ class AVAudioUnitMIDISynth: AVAudioUnitMIDIInstrument {
         super.init(audioComponentDescription: description)
     }
     
-    /**
-     Loads the default sound font.
-     */
+
+    /// Loads the default sound font.
+    /// If the file is not found, halt with an error message.
     func loadMIDISynthSoundFont()  {
-        
-        if let bankURL = NSBundle.mainBundle().URLForResource("FluidR3 GM2-2", withExtension: "SF2")  {
-            loadMIDISynthSoundFont(bankURL)
-            
-//            let status = AudioUnitSetProperty(
-//                self.audioUnit,
-//                AudioUnitPropertyID(kMusicDeviceProperty_SoundBankURL),
-//                AudioUnitScope(kAudioUnitScope_Global),
-//                0,
-//                &bankURL,
-//                UInt32(sizeof(bankURL.dynamicType)))
-//            
-//            if status != OSStatus(noErr) {
-//                print("error \(status)")
-//            }
-        } else {
-            print("Could not load sound font")
+        guard let bankURL = NSBundle.mainBundle().URLForResource("FluidR3 GM2-2", withExtension: "SF2")   else {
+            fatalError("Get the default sound font URL correct!")
         }
-        print("loaded sound font")
+
+        loadMIDISynthSoundFont(bankURL)
     }
     
-    /**
-     Loads the specified sound font.
-     - parameter: A URL to the sound font.
-     */
+
+    /// Loads the specified sound font.
+    /// - parameter bankURL: A URL to the sound font.
 
     func loadMIDISynthSoundFont(var bankURL:NSURL)  {
         
@@ -157,8 +140,12 @@ class AVAudioUnitMIDISynth: AVAudioUnitMIDIInstrument {
 
 /**
  Possible Errors for this AudioUnit.
- - EngineNotStarted: The AVAudioEngine needs to be started
- - BadSoundFont: The specified sound font is no good
+ 
+ - EngineNotStarted:
+ The AVAudioEngine needs to be started
+ 
+ - BadSoundFont: 
+ The specified sound font is no good
 
  */
 enum AVAudioUnitMIDISynthError: ErrorType {
