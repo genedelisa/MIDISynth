@@ -10,25 +10,23 @@ import Foundation
 import AVFoundation
 
 
-/**
-
- A multi-timbral implementation of AVAudioUnitMIDIInstrument as an AVAudioUnit.
- 
- - author: Gene De Lisa
- 
- - requires: AVFoundation
- 
- - seealso:
- [The Swift Standard Library Reference](https://developer.apple.com/library/prerelease/ios//documentation/General/Reference/SwiftStandardLibraryReference/index.html)
-
- - seealso:
- [Constructing Audio Unit Apps](https://developer.apple.com/library/ios/documentation/MusicAudio/Conceptual/AudioUnitHostingGuide_iOS/ConstructingAudioUnitApps/ConstructingAudioUnitApps.html)
-
- - seealso:
- [Audio Unit Reference](https://developer.apple.com/library/ios/documentation/AudioUnit/Reference/AudioUnit_Framework/index.html)
-
-*/
-
+ /// #An AVAudioUnit example.
+ ///
+ /// A multi-timbral implementation of `AVAudioUnitMIDIInstrument` as an `AVAudioUnit`.
+ /// This will use the polyphonic `kAudioUnitSubType_MIDISynth` audio unit.
+ ///
+ /// - author: Gene De Lisa
+ /// - copyright: 2016 Gene De Lisa
+ /// - date: February 2016
+ /// - requires: AVFoundation
+ /// - seealso:
+ ///[The Swift Standard Library Reference](https://developer.apple.com/library/prerelease/ios//documentation/General/Reference/SwiftStandardLibraryReference/index.html)
+ ///
+ /// - seealso:
+ ///[Constructing Audio Unit Apps](https://developer.apple.com/library/ios/documentation/MusicAudio/Conceptual/AudioUnitHostingGuide_iOS/ConstructingAudioUnitApps/ConstructingAudioUnitApps.html)
+ ///
+ /// - seealso:
+ ///[Audio Unit Reference](https://developer.apple.com/library/ios/documentation/AudioUnit/Reference/AudioUnit_Framework/index.html)
 class AVAudioUnitMIDISynth: AVAudioUnitMIDIInstrument {
     
     override init() {
@@ -42,21 +40,20 @@ class AVAudioUnitMIDISynth: AVAudioUnitMIDIInstrument {
         super.init(audioComponentDescription: description)
     }
     
-
+    
     /// Loads the default sound font.
     /// If the file is not found, halt with an error message.
     func loadMIDISynthSoundFont()  {
         guard let bankURL = NSBundle.mainBundle().URLForResource("FluidR3 GM2-2", withExtension: "SF2")   else {
             fatalError("Get the default sound font URL correct!")
         }
-
+        
         loadMIDISynthSoundFont(bankURL)
     }
     
-
+    
     /// Loads the specified sound font.
     /// - parameter bankURL: A URL to the sound font.
-
     func loadMIDISynthSoundFont(var bankURL:NSURL)  {
         
         let status = AudioUnitSetProperty(
@@ -74,17 +71,16 @@ class AVAudioUnitMIDISynth: AVAudioUnitMIDIInstrument {
         print("loaded sound font")
     }
     
-    
-    /**
-     
-     Turn on kAUMIDISynthProperty_EnablePreload so the midisynth will load the patch data from the file into memory.
-     You load the patches first before playing a sequence or sending messages.
-     Then you turn kAUMIDISynthProperty_EnablePreload off. It is now in a state where it will respond to MIDI program
-     change messages and switch to the already cached instrument data.
-     
-     - precondition: the graph must be initialized
-     */
-    
+     /// Pre-load the patches you will use.
+     ///
+     /// Turn on `kAUMIDISynthProperty_EnablePreload` so the midisynth will load the patch data from the file into memory.
+     /// You load the patches first before playing a sequence or sending messages.
+     /// Then you turn `kAUMIDISynthProperty_EnablePreload` off. It is now in a state where it will respond to MIDI program
+     /// change messages and switch to the already cached instrument data.
+     ///
+     /// - precondition: the graph must be initialized
+     ///
+     /// [Doug's post](http://prod.lists.apple.com/archives/coreaudio-api/2016/Jan/msg00018.html)
     func loadPatches(patches:[UInt32]) throws {
         
         if let e = engine {
@@ -93,7 +89,6 @@ class AVAudioUnitMIDISynth: AVAudioUnitMIDIInstrument {
                 throw AVAudioUnitMIDISynthError.EngineNotStarted
             }
         }
-
         
         let channel = UInt32(0)
         var enabled = UInt32(1)
@@ -138,17 +133,17 @@ class AVAudioUnitMIDISynth: AVAudioUnitMIDIInstrument {
     }
 }
 
-/**
- Possible Errors for this AudioUnit.
- 
- - EngineNotStarted:
- The AVAudioEngine needs to be started
- 
- - BadSoundFont: 
- The specified sound font is no good
 
- */
+/// Possible Errors for this `AVAudioUnit`.
+///
+/// - EngineNotStarted:
+/// The AVAudioEngine needs to be started
+///
+/// - BadSoundFont:
+/// The specified sound font is no good
 enum AVAudioUnitMIDISynthError: ErrorType {
+    /// The AVAudioEngine needs to be started and it's not.
     case EngineNotStarted
+    /// The specified sound font is no good.
     case BadSoundFont
 }

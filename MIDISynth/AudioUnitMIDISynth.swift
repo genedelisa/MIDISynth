@@ -12,8 +12,9 @@ import AudioToolbox
 import CoreAudio
 
 
-/// # A Core Audio MIDISynth AudioUnit example.
+/// # A Core Audio MIDISynth `AudioUnit` example.
 /// This will add a polyphonic `kAudioUnitSubType_MIDISynth` audio unit to the `AUGraph`.
+///
 /// - author: Gene De Lisa
 /// - copyright: 2016 Gene De Lisa
 /// - date: February 2016
@@ -35,12 +36,12 @@ class AudioUnitMIDISynth : NSObject {
     var pitch           = UInt32(60)
     
     
-     /// Initialize.
-     /// set up the graph, load a sound font into the synth, create a sequence, create a player for
-     /// that sequence, and start the graph.
+    /// Initialize.
+    /// set up the graph, load a sound font into the synth, create a sequence, create a player for
+    /// that sequence, and start the graph.
     override init() {
         super.init()
-
+        
         augraphSetup()
         loadMIDISynthSoundFont()
         initializeGraph()
@@ -81,7 +82,7 @@ class AudioUnitMIDISynth : NSObject {
         
         AudioUtils.CheckError(status)
     }
-
+    
     /// Create the Output Node and add it to the `AUGraph`.
     func createIONode() {
         var cd = AudioComponentDescription(
@@ -104,9 +105,9 @@ class AudioUnitMIDISynth : NSObject {
         AudioUtils.CheckError(status)
     }
     
-
-
-
+    
+    
+    
     /// This will load the default sound font and set the synth unit's property.
     /// - postcondition: `self.midisynthUnit` will have it's sound font url set.
     func loadMIDISynthSoundFont()  {
@@ -139,7 +140,6 @@ class AudioUnitMIDISynth : NSObject {
     /// - precondition: the graph must be initialized
     ///
     /// [Doug's post](http://prod.lists.apple.com/archives/coreaudio-api/2016/Jan/msg00018.html)
-    
     func loadPatches() {
         
         if !isGraphInitialized() {
@@ -215,8 +215,9 @@ class AudioUnitMIDISynth : NSObject {
         return Bool(isRunning)
     }
     
-     /// Generate a random pitch between 36 (C below middle C) and 100.
-     /// - postcondition: self.pitch is modified
+    /// Generate a random pitch between 36 (C below middle C) and 100.
+    ///
+    /// - postcondition: self.pitch is modified
     func generateRandomPitch() {
         pitch = arc4random_uniform(64) + 36 // 36 - 100
     }
@@ -247,7 +248,6 @@ class AudioUnitMIDISynth : NSObject {
     }
     
     /// Send a note on message using patch2 on channel 0
-
     func playPatch2On()    {
         
         let channel = UInt32(0)
@@ -380,7 +380,7 @@ class AudioUnitMIDISynth : NSObject {
         
         return musicSequence
     }
-
+    
     /// Create a `MusicPlayer` with the specified sequence.
     ///
     /// - parameters:

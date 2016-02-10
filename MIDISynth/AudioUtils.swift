@@ -23,24 +23,29 @@ import CoreAudio
 
 import AVFoundation
 
+
+/// # A few utilities for using Core Audio.
+///
+/// I started with [Adamson's](http://amzn.to/1KG0yWe) Objective-C CheckError method. The translation
+/// into Swift was a bit of a pain.
+///
+/// - author: Gene De Lisa
+/// - copyright: 2016 Gene De Lisa
+/// - date: February 2016
 public class AudioUtils {
     
     private init(){
     }
     
-    func OSTypeFrom(string : String) -> UInt {
-        var result : UInt = 0
-        if let data = string.dataUsingEncoding(NSMacOSRomanStringEncoding) {
-            let bytes = UnsafePointer<UInt8>(data.bytes)
-            for i in 0..<data.length {
-                result = result << 8 + UInt(bytes[i])
-            }
-        }
-        return result
-    }
     
+
+    ///  Create a String from an encoded 4char.
+    ///
+    ///  - parameter n: The encoded 4char
+    ///
+    ///  - returns: The String representation.
     class func stringFrom4(n: Int) -> String {
-        
+
         var scalar = UnicodeScalar((n >> 24) & 255)
         if !scalar.isASCII() {
             return ""
@@ -68,25 +73,22 @@ public class AudioUtils {
         
         return s
     }
-    // osx only
-    //let s = UTCreateStringForOSType(error)
-    //
-    //        let e = UInt32(error)
-    ////        let swapped = CFSwapInt32HostToBig(e)
-    //        let swapped = e
-    //
-    //        let b1 = Character(UnicodeScalar(swapped & 0b00001))
-    //        let b2 = Character(UnicodeScalar(swapped & 0b00010))
-    //        let b3 = Character(UnicodeScalar(swapped & 0b00100))
-    //        let b4 = Character(UnicodeScalar(swapped & 0b01000))
-    //        print("check error string: \(b1) \(b2) \(b3) \(b4)")
     
-    
+    ///  Create a String from an encoded 4char.
+    ///
+    ///  - parameter status: an `OSStatus` containing the encoded 4char.
+    ///
+    ///  - returns: The String representation.
     class func stringFrom4(status: OSStatus) -> String {
         let n = Int(status)
         return stringFrom4(n)
     }
     
+    ///  Create an encoded 4char from a String.
+    ///
+    ///  - parameter s: The String.
+    ///
+    ///  - returns: the encoded Int
     class func valueFromString4(s: String) -> Int {
         var n = 0
         var r = ""
@@ -108,6 +110,30 @@ public class AudioUtils {
     }
     
     
+    // osx only
+    //let s = UTCreateStringForOSType(error)
+    //
+    //        let e = UInt32(error)
+    ////        let swapped = CFSwapInt32HostToBig(e)
+    //        let swapped = e
+    //
+    //        let b1 = Character(UnicodeScalar(swapped & 0b00001))
+    //        let b2 = Character(UnicodeScalar(swapped & 0b00010))
+    //        let b3 = Character(UnicodeScalar(swapped & 0b00100))
+    //        let b4 = Character(UnicodeScalar(swapped & 0b01000))
+    //        print("check error string: \(b1) \(b2) \(b3) \(b4)")
+    //    func OSTypeFrom(string : String) -> UInt {
+    //        var result : UInt = 0
+    //        if let data = string.dataUsingEncoding(NSMacOSRomanStringEncoding) {
+    //            let bytes = UnsafePointer<UInt8>(data.bytes)
+    //            for i in 0..<data.length {
+    //                result = result << 8 + UInt(bytes[i])
+    //            }
+    //        }
+    //        return result
+    //    }
+
+    
     //    func stringValue(unicodeValue: Int) -> String {
     //        var stringValue = ""
     //        var value = unicodeValue
@@ -121,25 +147,32 @@ public class AudioUtils {
     
     
     #if os(tvOS)
-    class func CheckError(error:OSStatus) {
-    if error == noErr {
+    /// Check the status code
+    ///
+    /// - parameter error: The status to check.
+    /// - todo: Finish this for tvOS
+    class func CheckError(status:OSStatus) {
+    if status == noErr {
     print("no error")
     return
     }
-    print("error \(error)")
+    print("error \(status)")
     }
     #elseif os(iOS)
-    class func CheckError(error:OSStatus) {
+    ///  Print a description of the status code to stdout if it's an error.
+    ///
+    ///  - parameter status: the status to check.
+    class func CheckError(status:OSStatus) {
         
-        if error == noErr {
+        if status == noErr {
             return
         }
         
-        let s = stringFrom4(error)
+        let s = stringFrom4(status)
         print("error chars '\(s)'")
         
         
-        switch(OSStatus(error)) {
+        switch(OSStatus(status)) {
             // AudioToolbox
         case kAUGraphErr_NodeNotFound:
             print("kAUGraphErr_NodeNotFound")
@@ -396,7 +429,7 @@ public class AudioUtils {
             
         default:
             print("huh?")
-            print("bad status \(error)")
+            print("bad status \(status)")
             //print("\(__LINE__) bad status \(error)")
         }
     }

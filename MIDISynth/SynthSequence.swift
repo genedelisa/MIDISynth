@@ -12,7 +12,14 @@ import AVFoundation
 import AudioToolbox
 import CoreAudio
 
-
+/// # An AVFoundation example to test our `AVAudioUnit`.
+///
+///
+///
+///
+/// - author: Gene De Lisa
+/// - copyright: 2016 Gene De Lisa
+/// - date: February 2016
 class SynthSequence : NSObject {
     
     var engine: AVAudioEngine!
@@ -55,7 +62,7 @@ class SynthSequence : NSObject {
         patches.append(0)
         patches.append(46) //harp
         
-        // must be after the engine has started. Otherwise you will get  kAudioUnitErr_Uninitialized
+        // must be after the engine has started. Otherwise you will get kAudioUnitErr_Uninitialized
         do {
             try midiSynth.loadPatches(patches)
         } catch AVAudioUnitMIDISynthError.EngineNotStarted {
@@ -80,6 +87,8 @@ class SynthSequence : NSObject {
         
     }
     
+    ///  Create an `AVAudioSequencer`.
+    ///  The `MusicSequence` it uses is generated.
     func setupSequencer() {
         
         self.sequencer = AVAudioSequencer(audioEngine: self.engine)
@@ -103,13 +112,15 @@ class SynthSequence : NSObject {
         sequencer.prepareToPlay()
         print(" loaded n \(sequencer.tracks.count) tracks")
     }
-    
+
+    ///  Create an `AVAudioSequencer`.
+    ///  The `MusicSequence` it uses read from a standard MIDI file.
     func setupSequencerFile() {
         
         self.sequencer = AVAudioSequencer(audioEngine: self.engine)
         
         let options = AVMusicSequenceLoadOptions.SMF_PreserveTracks
-        
+// or
 //        if let fileURL = NSBundle.mainBundle().URLForResource("chromatic2", withExtension: "mid") {
 //            do {
 //                try sequencer.loadFromURL(fileURL, options: options)
@@ -134,9 +145,12 @@ class SynthSequence : NSObject {
         print(sequencer)
     }
     
-    /**
-     AVAudioSequencer will not load a MusicSequence, but it will load NSData.
-     */
+
+    ///  `AVAudioSequencer` will not load a `MusicSequence`, but it will load `NSData`.
+    ///
+    ///  - parameter musicSequence: the `MusicSequence` that will be converted.
+    ///
+    ///  - returns: the `NSData` instance.
     func sequenceData(musicSequence:MusicSequence) -> NSData? {
         var status = OSStatus(noErr)
         
@@ -155,6 +169,9 @@ class SynthSequence : NSObject {
         return ns
     }
     
+    ///  Create a test `MusicSequence` with two tracks.
+    ///
+    ///  - returns: The `MusicSequence`.
     func createMusicSequence() -> MusicSequence {
         
         var musicSequence = MusicSequence()
@@ -261,7 +278,7 @@ class SynthSequence : NSObject {
         return musicSequence
     }
 
-    
+    ///  Play the sequence.
     func play() {
         if sequencer.playing {
             stop()
@@ -278,10 +295,12 @@ class SynthSequence : NSObject {
         }
     }
     
+    ///  Stop the sequence playing.
     func stop() {
         sequencer.stop()
     }
     
+    ///  Put the `AVAudioSession` into playback mode and activate it.
     func setSessionPlayback() {
         let audioSession = AVAudioSession.sharedInstance()
         do {
@@ -300,6 +319,7 @@ class SynthSequence : NSObject {
         }
     }
     
+    ///  Start the `AVAudioEngine`
     func startEngine() {
         
         if engine.running {
