@@ -3,6 +3,8 @@
 *.SF
 *.SF2
 
+docs/swiftDocs
+
 ### Xcode ###
 build/
 *.pbxuser

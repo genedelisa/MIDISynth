@@ -10,10 +10,6 @@ import Foundation
 import AVFoundation
 
 
-enum AVAudioUnitMIDISynthError: ErrorType {
-    case EngineNotStarted
-    case BadSoundFont
-}
 
 /**
 
@@ -48,6 +44,9 @@ class AVAudioUnitMIDISynth: AVAudioUnitMIDIInstrument {
         super.init(audioComponentDescription: description)
     }
     
+    /**
+     Loads the default sound font.
+     */
     func loadMIDISynthSoundFont()  {
         
         if let bankURL = NSBundle.mainBundle().URLForResource("FluidR3 GM2-2", withExtension: "SF2")  {
@@ -70,6 +69,11 @@ class AVAudioUnitMIDISynth: AVAudioUnitMIDIInstrument {
         print("loaded sound font")
     }
     
+    /**
+     Loads the specified sound font.
+     - parameter: A URL to the sound font.
+     */
+
     func loadMIDISynthSoundFont(var bankURL:NSURL)  {
         
         let status = AudioUnitSetProperty(
@@ -149,4 +153,15 @@ class AVAudioUnitMIDISynth: AVAudioUnitMIDIInstrument {
         // at this point the patches are loaded. You still have to send a program change at "play time" for the synth
         // to switch to that patch
     }
+}
+
+/**
+ Possible Errors for this AudioUnit.
+ - EngineNotStarted: The AVAudioEngine needs to be started
+ - BadSoundFont: The specified sound font is no good
+
+ */
+enum AVAudioUnitMIDISynthError: ErrorType {
+    case EngineNotStarted
+    case BadSoundFont
 }

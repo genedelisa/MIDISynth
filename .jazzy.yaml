@@ -1,0 +1,11 @@
+module_name: MIDISynth
+author_name: Gene De Lisa
+author_url: http://rockhoppertech.com/blog/
+github_url: http://github.com/genedelisa/MIDISynth
+min_acl: internal
+#min_acl: public
+clean: true
+copyright: "2016 © Gene De Lisa. See LICENSE for more details. [Rockhopper Technologies](http://rockhoppertech.com/)"
+readme_path: ./README.md
+output: docs/swiftDocs
+swift_version: 2.1.1

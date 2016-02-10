@@ -9,9 +9,14 @@
 
 import Foundation
 import AudioToolbox
-//import AVFoundation
 import CoreAudio
 
+
+/// # A Core Audio MIDISynth AudioUnit example.
+/// This will add a polyphonic `kAudioUnitSubType_MIDISynth` audio unit to the `AUGraph`.
+/// - author: Gene De Lisa
+/// - copyright: 2016 Gene De Lisa
+/// - date: February 2016
 class AudioUnitMIDISynth : NSObject {
     
     var processingGraph = AUGraph()
@@ -21,15 +26,21 @@ class AudioUnitMIDISynth : NSObject {
     var ioUnit          = AudioUnit()
     var musicSequence   = MusicSequence()
     var musicPlayer     = MusicPlayer()
-    let patch1          = UInt32(46)// harp
-    let patch2          = UInt32(0)// piano
+    /// Harp
+    let patch1          = UInt32(46)
+    /// Piano
+    let patch2          = UInt32(0)
     /// random pitch
+    /// - seealso:  generateRandomPitch()
     var pitch           = UInt32(60)
     
     
+     /// Initialize.
+     /// set up the graph, load a sound font into the synth, create a sequence, create a player for
+     /// that sequence, and start the graph.
     override init() {
         super.init()
-        
+
         augraphSetup()
         loadMIDISynthSoundFont()
         initializeGraph()
@@ -39,7 +50,7 @@ class AudioUnitMIDISynth : NSObject {
         startGraph()
     }
     
-    
+    /// Create the `AUGraph`, the nodes and units, then wire them together.
     func augraphSetup() {
         var status = OSStatus(noErr)
         
@@ -59,8 +70,8 @@ class AudioUnitMIDISynth : NSObject {
         
         status = AUGraphNodeInfo(self.processingGraph, self.ioNode, nil, &ioUnit)
         AudioUtils.CheckError(status)
-
-
+        
+        
         let synthOutputElement:AudioUnitElement = 0
         let ioUnitInputElement:AudioUnitElement = 0
         
@@ -70,7 +81,8 @@ class AudioUnitMIDISynth : NSObject {
         
         AudioUtils.CheckError(status)
     }
-    
+
+    /// Create the Output Node and add it to the `AUGraph`.
     func createIONode() {
         var cd = AudioComponentDescription(
             componentType: OSType(kAudioUnitType_Output),
@@ -81,7 +93,7 @@ class AudioUnitMIDISynth : NSObject {
         AudioUtils.CheckError(status)
     }
     
-    
+    /// Create the Synth Node and add it to the `AUGraph`.
     func createSynthNode() {
         var cd = AudioComponentDescription(
             componentType: OSType(kAudioUnitType_MusicDevice),
@@ -92,7 +104,11 @@ class AudioUnitMIDISynth : NSObject {
         AudioUtils.CheckError(status)
     }
     
-    
+
+
+
+    /// This will load the default sound font and set the synth unit's property.
+    /// - postcondition: `self.midisynthUnit` will have it's sound font url set.
     func loadMIDISynthSoundFont()  {
         
         if var bankURL = NSBundle.mainBundle().URLForResource("FluidR3 GM2-2", withExtension: "SF2")  {
@@ -112,19 +128,17 @@ class AudioUnitMIDISynth : NSObject {
         print("loaded sound font")
     }
     
-    /**
-     
-     Turn on kAUMIDISynthProperty_EnablePreload so the midisynth will load the patch data from the file into memory.
-     You load the patches first before playing a sequence or sending messages.
-     Then you turn kAUMIDISynthProperty_EnablePreload off. It is now in a state where it will respond to MIDI program
-     change messages and switch to the already cached instrument data.
-     
-     precondition: the graph must be initialized
-     
-     [Doug's post](http://prod.lists.apple.com/archives/coreaudio-api/2016/Jan/msg00018.html)
-     
-     */
     
+    /// Pre-load the patches you will use.
+    ///
+    /// Turn on `kAUMIDISynthProperty_EnablePreload` so the midisynth will load the patch data from the file into memory.
+    /// You load the patches first before playing a sequence or sending messages.
+    /// Then you turn `kAUMIDISynthProperty_EnablePreload` off. It is now in a state where it will respond to MIDI program
+    /// change messages and switch to the already cached instrument data.
+    ///
+    /// - precondition: the graph must be initialized
+    ///
+    /// [Doug's post](http://prod.lists.apple.com/archives/coreaudio-api/2016/Jan/msg00018.html)
     
     func loadPatches() {
         
@@ -168,7 +182,10 @@ class AudioUnitMIDISynth : NSObject {
     }
     
     
-    //https://developer.apple.com/library/prerelease/ios/documentation/AudioToolbox/Reference/AUGraphServicesReference/index.html#//apple_ref/c/func/AUGraphIsInitialized
+    /// Check to see if the `AUGraph` is Initialize.
+    ///
+    /// - returns: `true` if it's running, `false` if not
+    /// - seealso: [AUGraphIsInitialized](/https://developer.apple.com/library/prerelease/ios/documentation/AudioToolbox/Reference/AUGraphServicesReference/index.html#//apple_ref/c/func/AUGraphIsInitialized)
     func isGraphInitialized() -> Bool {
         var outIsInitialized = DarwinBoolean(false)
         let status = AUGraphIsInitialized(self.processingGraph, &outIsInitialized)
@@ -176,16 +193,21 @@ class AudioUnitMIDISynth : NSObject {
         return Bool(outIsInitialized)
     }
     
+    /// Initializes the `AUGraph.
     func initializeGraph() {
         let status = AUGraphInitialize(self.processingGraph)
         AudioUtils.CheckError(status)
     }
     
+    /// Starts the `AUGraph`
     func startGraph() {
         let status = AUGraphStart(self.processingGraph)
         AudioUtils.CheckError(status)
     }
     
+    /// Check to see if the `AUGraph` is running.
+    ///
+    /// - returns: `true` if it's running, `false` if not
     func isGraphRunning() -> Bool {
         var isRunning = DarwinBoolean(false)
         let status = AUGraphIsRunning(self.processingGraph, &isRunning)
@@ -193,11 +215,13 @@ class AudioUnitMIDISynth : NSObject {
         return Bool(isRunning)
     }
     
-    
+     /// Generate a random pitch between 36 (C below middle C) and 100.
+     /// - postcondition: self.pitch is modified
     func generateRandomPitch() {
         pitch = arc4random_uniform(64) + 36 // 36 - 100
     }
     
+    /// Send a note on message using patch1 on channel 0
     func playPatch1On()    {
         
         let channel = UInt32(0)
@@ -213,6 +237,7 @@ class AudioUnitMIDISynth : NSObject {
         AudioUtils.CheckError(status)
     }
     
+    /// Send a note off message using patch1 on channel 0
     func playPatch1Off()    {
         let channel = UInt32(0)
         let noteCommand = UInt32(0x80 | channel)
@@ -221,6 +246,8 @@ class AudioUnitMIDISynth : NSObject {
         AudioUtils.CheckError(status)
     }
     
+    /// Send a note on message using patch2 on channel 0
+
     func playPatch2On()    {
         
         let channel = UInt32(0)
@@ -236,6 +263,7 @@ class AudioUnitMIDISynth : NSObject {
         AudioUtils.CheckError(status)
     }
     
+    /// Send a note off message using patch2 on channel 0
     func playPatch2Off()    {
         let channel = UInt32(0)
         let noteCommand = UInt32(0x80 | channel)
@@ -245,6 +273,11 @@ class AudioUnitMIDISynth : NSObject {
     }
     
     
+    /// Create a test `MusicSequence`.
+    ///
+    /// - throws: Nothing, but it should
+    /// - todo: create an `ErrorType` ennum
+    /// - returns: a `MusicSequence`
     func createMusicSequence() -> MusicSequence {
         
         var musicSequence = MusicSequence()
@@ -347,7 +380,14 @@ class AudioUnitMIDISynth : NSObject {
         
         return musicSequence
     }
-    
+
+    /// Create a `MusicPlayer` with the specified sequence.
+    ///
+    /// - parameters:
+    ///   - musicSequence: a valid `MusicSequence` instance
+    /// - throws: Nothing, but it should
+    /// - todo: create an `ErrorType` ennum
+    /// - returns: a `MusicPlayer`
     func createPlayer(musicSequence:MusicSequence) -> MusicPlayer {
         var musicPlayer = MusicPlayer()
         var status = OSStatus(noErr)
@@ -370,7 +410,9 @@ class AudioUnitMIDISynth : NSObject {
         return musicPlayer
     }
     
-    
+    /// Make the `MusicPlayer` play its sequence
+    /// - throws: Nothing, but it should
+    /// - todo: create an `ErrorType` ennum
     func musicPlayerPlay() {
         var status = OSStatus(noErr)
         var playing:DarwinBoolean = false

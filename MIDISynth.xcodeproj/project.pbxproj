@@ -6,13 +6,28 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		B050231D1C6A92F500ACED32 /* Docs */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = B05023201C6A92F500ACED32 /* Build configuration list for PBXAggregateTarget "Docs" */;
+			buildPhases = (
+				B05023211C6A930000ACED32 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Docs;
+			productName = Docs;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		B05023171C6A219D00ACED32 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = B05023151C6A219D00ACED32 /* .swiftlint.yml */; };
-		B05023181C6A219D00ACED32 /* .jazzy.yaml in Resources */ = {isa = PBXBuildFile; fileRef = B05023161C6A219D00ACED32 /* .jazzy.yaml */; };
 		B08053BA1C6777D40018095B /* FluidR3 GM2-2.SF2 in Resources */ = {isa = PBXBuildFile; fileRef = B08053B91C6777D40018095B /* FluidR3 GM2-2.SF2 */; };
 		B08053BC1C67793E0018095B /* chromatic2.mid in Resources */ = {isa = PBXBuildFile; fileRef = B08053BB1C67793E0018095B /* chromatic2.mid */; };
 		B08053BE1C677FF90018095B /* The Legend of Zelda - Koji Kondo - Main Theme (King Meteor).mid in Resources */ = {isa = PBXBuildFile; fileRef = B08053BD1C677FF90018095B /* The Legend of Zelda - Koji Kondo - Main Theme (King Meteor).mid */; };
 		B08053C01C67811E0018095B /* AudioUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08053BF1C67811E0018095B /* AudioUtils.swift */; };
+		B09AD28C1C6B71DC0050DB1D /* .jazzy.yaml in Resources */ = {isa = PBXBuildFile; fileRef = B09AD28B1C6B71DC0050DB1D /* .jazzy.yaml */; };
+		B09AD28E1C6B72900050DB1D /* docs in Resources */ = {isa = PBXBuildFile; fileRef = B09AD28D1C6B72900050DB1D /* docs */; };
 		B0BD4E431C66312400B84077 /* AudioUnitMIDISynth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BD4E421C66312400B84077 /* AudioUnitMIDISynth.swift */; };
 		B0BD4E4D1C6695F900B84077 /* AVAudioUnitMIDISynth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BD4E4C1C6695F900B84077 /* AVAudioUnitMIDISynth.swift */; };
 		B0BD4E4F1C66975100B84077 /* SynthSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BD4E4E1C66975100B84077 /* SynthSequence.swift */; };
@@ -41,11 +56,12 @@
 
 /* Begin PBXFileReference section */
 		B05023151C6A219D00ACED32 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
-		B05023161C6A219D00ACED32 /* .jazzy.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .jazzy.yaml; sourceTree = "<group>"; };
 		B08053B91C6777D40018095B /* FluidR3 GM2-2.SF2 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FluidR3 GM2-2.SF2"; path = "../../AVAudioUnitSamplerFrobs/AVAudioUnitSamplerFrobs/FluidR3 GM2-2.SF2"; sourceTree = "<group>"; };
 		B08053BB1C67793E0018095B /* chromatic2.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; name = chromatic2.mid; path = ../../AVAudioUnitSamplerFrobs/AVAudioUnitSamplerFrobs/chromatic2.mid; sourceTree = "<group>"; };
 		B08053BD1C677FF90018095B /* The Legend of Zelda - Koji Kondo - Main Theme (King Meteor).mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; name = "The Legend of Zelda - Koji Kondo - Main Theme (King Meteor).mid"; path = "../../../../../../Downloads/Soundfont/arachno-soundfont-10-sf2/MIDI Files/Covers/Games/The Legend of Zelda - Koji Kondo - Main Theme (King Meteor).mid"; sourceTree = "<group>"; };
 		B08053BF1C67811E0018095B /* AudioUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioUtils.swift; sourceTree = "<group>"; };
+		B09AD28B1C6B71DC0050DB1D /* .jazzy.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .jazzy.yaml; path = ../.jazzy.yaml; sourceTree = "<group>"; };
+		B09AD28D1C6B72900050DB1D /* docs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = docs; sourceTree = "<group>"; };
 		B0BD4E421C66312400B84077 /* AudioUnitMIDISynth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioUnitMIDISynth.swift; sourceTree = "<group>"; };
 		B0BD4E4C1C6695F900B84077 /* AVAudioUnitMIDISynth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioUnitMIDISynth.swift; sourceTree = "<group>"; };
 		B0BD4E4E1C66975100B84077 /* SynthSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynthSequence.swift; sourceTree = "<group>"; };
@@ -100,6 +116,7 @@
 		B0E9F6A71B5D52940035EEBA = {
 			isa = PBXGroup;
 			children = (
+				B09AD28D1C6B72900050DB1D /* docs */,
 				B0E9F6E01B5D55600035EEBA /* CoreMIDI.framework */,
 				B0E9F6DE1B5D55550035EEBA /* CoreAudio.framework */,
 				B0E9F6B21B5D52950035EEBA /* MIDISynth */,
@@ -139,8 +156,8 @@
 		B0E9F6B71B5D52950035EEBA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B09AD28B1C6B71DC0050DB1D /* .jazzy.yaml */,
 				B05023151C6A219D00ACED32 /* .swiftlint.yml */,
-				B05023161C6A219D00ACED32 /* .jazzy.yaml */,
 				B0E9F6B81B5D52950035EEBA /* README.md */,
 				B0E9F6BA1B5D52950035EEBA /* LICENSE */,
 				B0E9F6BC1B5D52950035EEBA /* .gitignore */,
@@ -205,6 +222,9 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Gene De Lisa";
 				TargetAttributes = {
+					B050231D1C6A92F500ACED32 = {
+						CreatedOnToolsVersion = 7.2;
+					};
 					B0E9F6AF1B5D52950035EEBA = {
 						CreatedOnToolsVersion = 7.0;
 					};
@@ -229,6 +249,7 @@
 			targets = (
 				B0E9F6AF1B5D52950035EEBA /* MIDISynth */,
 				B0E9F6CC1B5D52950035EEBA /* MIDISynthTests */,
+				B050231D1C6A92F500ACED32 /* Docs */,
 			);
 		};
 /* End PBXProject section */
@@ -245,8 +266,9 @@
 				B0E9F6BB1B5D52950035EEBA /* LICENSE in Resources */,
 				B08053BE1C677FF90018095B /* The Legend of Zelda - Koji Kondo - Main Theme (King Meteor).mid in Resources */,
 				B0E9F6C71B5D52950035EEBA /* LaunchScreen.storyboard in Resources */,
-				B05023181C6A219D00ACED32 /* .jazzy.yaml in Resources */,
+				B09AD28C1C6B71DC0050DB1D /* .jazzy.yaml in Resources */,
 				B0E9F6C21B5D52950035EEBA /* Main.storyboard in Resources */,
+				B09AD28E1C6B72900050DB1D /* docs in Resources */,
 				B0E9F6C41B5D52950035EEBA /* Assets.xcassets in Resources */,
 				B08053BC1C67793E0018095B /* chromatic2.mid in Resources */,
 			);
@@ -260,6 +282,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B05023211C6A930000ACED32 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "PATH=$(bash -l -c 'echo $PATH')\n\njazzy\n\n#jazzy --clean --author \"Gene De Lisa\" --author_url \"http://rockhoppertech.com/blog\" --module MIDISynth --min-acl internal --readme ./README.md --github_url \"https://github.com/genedelisa/MIDISynth\" --output docs/swift_output\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B0E9F6AC1B5D52950035EEBA /* Sources */ = {
@@ -313,6 +351,20 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		B050231E1C6A92F500ACED32 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B050231F1C6A92F500ACED32 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		B0E9F6D41B5D52950035EEBA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -445,6 +497,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B05023201C6A92F500ACED32 /* Build configuration list for PBXAggregateTarget "Docs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B050231E1C6A92F500ACED32 /* Debug */,
+				B050231F1C6A92F500ACED32 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B0E9F6AB1B5D52940035EEBA /* Build configuration list for PBXProject "MIDISynth" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
