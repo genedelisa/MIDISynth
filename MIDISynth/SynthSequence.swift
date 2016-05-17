@@ -45,9 +45,15 @@ class SynthSequence : NSObject {
             midiSynth.loadMIDISynthSoundFont()
         }
         
+        let distortion = AVAudioUnitDistortionEffect()
+        engine.attachNode(distortion)
+        engine.connect(distortion, to: engine.mainMixerNode, format: nil)
         
         engine.attachNode(midiSynth)
-        engine.connect(midiSynth, to: engine.mainMixerNode, format: nil)
+        // with distortion
+        engine.connect(midiSynth, to: distortion, format: nil)
+        // without distortion
+//        engine.connect(midiSynth, to: engine.mainMixerNode, format: nil)
 
         print("audio auaudiounit \(midiSynth.AUAudioUnit)")
         print("audio audiounit \(midiSynth.audioUnit)")
@@ -174,14 +180,14 @@ class SynthSequence : NSObject {
     ///  - returns: The `MusicSequence`.
     func createMusicSequence() -> MusicSequence {
         
-        var musicSequence = MusicSequence()
+        var musicSequence : MusicSequence = nil
         var status = NewMusicSequence(&musicSequence)
         if status != OSStatus(noErr) {
-            print("\(__LINE__) bad status \(status) creating sequence")
+            print("\(#line) bad status \(status) creating sequence")
         }
         
         // add a track
-        var track = MusicTrack()
+        var track : MusicTrack = nil
         status = MusicSequenceNewTrack(musicSequence, &track)
         if status != OSStatus(noErr) {
             print("error creating track \(status)")
@@ -220,14 +226,14 @@ class SynthSequence : NSObject {
             if status != OSStatus(noErr) {
                 print("creating new midi note event \(status)")
             }
-            beat++
+            beat += 1
         }
         
         // another track
         
         channel = UInt8(1)
         
-        track = MusicTrack()
+        track  = nil
         status = MusicSequenceNewTrack(musicSequence, &track)
         if status != OSStatus(noErr) {
             print("error creating track \(status)")
@@ -263,7 +269,7 @@ class SynthSequence : NSObject {
             if status != OSStatus(noErr) {
                 print("creating new midi note event \(status)")
             }
-            beat++
+            beat += 1
         }
         
         // associate the AUGraph with the sequence.
@@ -340,17 +346,17 @@ class SynthSequence : NSObject {
     
     func addObservers() {
         NSNotificationCenter.defaultCenter().addObserver(self,
-            selector:"engineConfigurationChange:",
+            selector:#selector(SynthSequence.engineConfigurationChange(_:)),
             name:AVAudioEngineConfigurationChangeNotification,
             object:engine)
         
         NSNotificationCenter.defaultCenter().addObserver(self,
-            selector:"sessionInterrupted:",
+            selector:#selector(SynthSequence.sessionInterrupted(_:)),
             name:AVAudioSessionInterruptionNotification,
             object:engine)
         
         NSNotificationCenter.defaultCenter().addObserver(self,
-            selector:"sessionRouteChange:",
+            selector:#selector(SynthSequence.sessionRouteChange(_:)),
             name:AVAudioSessionRouteChangeNotification,
             object:engine)
     }

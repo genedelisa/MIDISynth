@@ -28,6 +28,7 @@
 		B08053C01C67811E0018095B /* AudioUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08053BF1C67811E0018095B /* AudioUtils.swift */; };
 		B09AD28C1C6B71DC0050DB1D /* .jazzy.yaml in Resources */ = {isa = PBXBuildFile; fileRef = B09AD28B1C6B71DC0050DB1D /* .jazzy.yaml */; };
 		B09AD28E1C6B72900050DB1D /* docs in Resources */ = {isa = PBXBuildFile; fileRef = B09AD28D1C6B72900050DB1D /* docs */; };
+		B0B68A181CEB9B7800C2FD88 /* AVAudioUnitDistortionEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B68A171CEB9B7800C2FD88 /* AVAudioUnitDistortionEffect.swift */; };
 		B0BD4E431C66312400B84077 /* AudioUnitMIDISynth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BD4E421C66312400B84077 /* AudioUnitMIDISynth.swift */; };
 		B0BD4E4D1C6695F900B84077 /* AVAudioUnitMIDISynth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BD4E4C1C6695F900B84077 /* AVAudioUnitMIDISynth.swift */; };
 		B0BD4E4F1C66975100B84077 /* SynthSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BD4E4E1C66975100B84077 /* SynthSequence.swift */; };
@@ -62,6 +63,7 @@
 		B08053BF1C67811E0018095B /* AudioUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioUtils.swift; sourceTree = "<group>"; };
 		B09AD28B1C6B71DC0050DB1D /* .jazzy.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .jazzy.yaml; path = ../.jazzy.yaml; sourceTree = "<group>"; };
 		B09AD28D1C6B72900050DB1D /* docs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = docs; sourceTree = "<group>"; };
+		B0B68A171CEB9B7800C2FD88 /* AVAudioUnitDistortionEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioUnitDistortionEffect.swift; sourceTree = "<group>"; };
 		B0BD4E421C66312400B84077 /* AudioUnitMIDISynth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioUnitMIDISynth.swift; sourceTree = "<group>"; };
 		B0BD4E4C1C6695F900B84077 /* AVAudioUnitMIDISynth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioUnitMIDISynth.swift; sourceTree = "<group>"; };
 		B0BD4E4E1C66975100B84077 /* SynthSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynthSequence.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				B0E9F6B71B5D52950035EEBA /* Supporting Files */,
 				B0BD4E421C66312400B84077 /* AudioUnitMIDISynth.swift */,
 				B0BD4E4C1C6695F900B84077 /* AVAudioUnitMIDISynth.swift */,
+				B0B68A171CEB9B7800C2FD88 /* AVAudioUnitDistortionEffect.swift */,
 				B0BD4E4E1C66975100B84077 /* SynthSequence.swift */,
 				B08053BF1C67811E0018095B /* AudioUtils.swift */,
 			);
@@ -295,7 +298,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "PATH=$(bash -l -c 'echo $PATH')\n\njazzy\n\n#jazzy --clean --author \"Gene De Lisa\" --author_url \"http://rockhoppertech.com/blog\" --module MIDISynth --min-acl internal --readme ./README.md --github_url \"https://github.com/genedelisa/MIDISynth\" --output docs/swift_output\n";
+			shellScript = "PATH=$(bash -l -c 'echo $PATH')\nexport TERM=tty\n#jazzy\n\n#jazzy --clean --author \"Gene De Lisa\" --author_url \"http://rockhoppertech.com/blog\" --module MIDISynth --min-acl internal --readme ./README.md --github_url \"https://github.com/genedelisa/MIDISynth\" --output docs/swift_output\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -307,6 +310,7 @@
 				B0BD4E4F1C66975100B84077 /* SynthSequence.swift in Sources */,
 				B0BD4E431C66312400B84077 /* AudioUnitMIDISynth.swift in Sources */,
 				B0E9F6B61B5D52950035EEBA /* ViewController.swift in Sources */,
+				B0B68A181CEB9B7800C2FD88 /* AVAudioUnitDistortionEffect.swift in Sources */,
 				B0E9F6B41B5D52950035EEBA /* AppDelegate.swift in Sources */,
 				B0BD4E4D1C6695F900B84077 /* AVAudioUnitMIDISynth.swift in Sources */,
 				B08053C01C67811E0018095B /* AudioUtils.swift in Sources */,
