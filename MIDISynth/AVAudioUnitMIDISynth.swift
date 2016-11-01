@@ -44,7 +44,7 @@ class AVAudioUnitMIDISynth: AVAudioUnitMIDIInstrument {
     /// Loads the default sound font.
     /// If the file is not found, halt with an error message.
     func loadMIDISynthSoundFont()  {
-        guard let bankURL = NSBundle.mainBundle().URLForResource("FluidR3 GM2-2", withExtension: "SF2")   else {
+        guard let bankURL = Bundle.main.url(forResource: "FluidR3 GM2-2", withExtension: "SF2")   else {
             fatalError("Get the default sound font URL correct!")
         }
         
@@ -54,7 +54,8 @@ class AVAudioUnitMIDISynth: AVAudioUnitMIDIInstrument {
     
     /// Loads the specified sound font.
     /// - parameter bankURL: A URL to the sound font.
-    func loadMIDISynthSoundFont(var bankURL:NSURL)  {
+    func loadMIDISynthSoundFont(_ bankURL:URL)  {
+        var bankURL = bankURL
         
         let status = AudioUnitSetProperty(
             self.audioUnit,
@@ -62,7 +63,7 @@ class AVAudioUnitMIDISynth: AVAudioUnitMIDIInstrument {
             AudioUnitScope(kAudioUnitScope_Global),
             0,
             &bankURL,
-            UInt32(sizeof(bankURL.dynamicType)))
+            UInt32(MemoryLayout<URL>.size))
         
         if status != OSStatus(noErr) {
             print("error \(status)")
@@ -81,12 +82,12 @@ class AVAudioUnitMIDISynth: AVAudioUnitMIDIInstrument {
      /// - precondition: the graph must be initialized
      ///
      /// [Doug's post](http://prod.lists.apple.com/archives/coreaudio-api/2016/Jan/msg00018.html)
-    func loadPatches(patches:[UInt32]) throws {
+    func loadPatches(_ patches:[UInt32]) throws {
         
         if let e = engine {
-            if !e.running {
+            if !e.isRunning {
                 print("audio engine needs to be running")
-                throw AVAudioUnitMIDISynthError.EngineNotStarted
+                throw AVAudioUnitMIDISynthError.engineNotStarted
             }
         }
         
@@ -99,8 +100,8 @@ class AVAudioUnitMIDISynth: AVAudioUnitMIDIInstrument {
             AudioUnitScope(kAudioUnitScope_Global),
             0,
             &enabled,
-            UInt32(sizeof(UInt32)))
-        if status != OSStatus(noErr) {
+            UInt32(MemoryLayout<UInt32>.size))
+        if status != noErr {
             print("error \(status)")
         }
         //        let bankSelectCommand = UInt32(0xB0 | 0)
@@ -110,7 +111,7 @@ class AVAudioUnitMIDISynth: AVAudioUnitMIDIInstrument {
         for patch in patches {
             print("preloading patch \(patch)")
             status = MusicDeviceMIDIEvent(self.audioUnit, pcCommand, patch, 0, 0)
-            if status != OSStatus(noErr) {
+            if status != noErr {
                 print("error \(status)")
                 AudioUtils.CheckError(status)
             }
@@ -123,8 +124,8 @@ class AVAudioUnitMIDISynth: AVAudioUnitMIDIInstrument {
             AudioUnitScope(kAudioUnitScope_Global),
             0,
             &enabled,
-            UInt32(sizeof(UInt32)))
-        if status != OSStatus(noErr) {
+            UInt32(MemoryLayout<UInt32>.size))
+        if status != noErr {
             print("error \(status)")
         }
         
@@ -141,9 +142,9 @@ class AVAudioUnitMIDISynth: AVAudioUnitMIDIInstrument {
 ///
 /// - BadSoundFont:
 /// The specified sound font is no good
-enum AVAudioUnitMIDISynthError: ErrorType {
+enum AVAudioUnitMIDISynthError: Error {
     /// The AVAudioEngine needs to be started and it's not.
-    case EngineNotStarted
+    case engineNotStarted
     /// The specified sound font is no good.
-    case BadSoundFont
+    case badSoundFont
 }

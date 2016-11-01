@@ -38,7 +38,7 @@ class SynthSequence : NSObject {
 
         midiSynth = AVAudioUnitMIDISynth()
         
-        if let bankURL = NSBundle.mainBundle().URLForResource("FluidR3 GM2-2", withExtension: "SF2")  {
+        if let bankURL = Bundle.main.url(forResource: "FluidR3 GM2-2", withExtension: "SF2")  {
             midiSynth.loadMIDISynthSoundFont(bankURL)
             print("loading from url")
         } else {
@@ -46,16 +46,16 @@ class SynthSequence : NSObject {
         }
         
         let distortion = AVAudioUnitDistortionEffect()
-        engine.attachNode(distortion)
+        engine.attach(distortion)
         engine.connect(distortion, to: engine.mainMixerNode, format: nil)
         
-        engine.attachNode(midiSynth)
+        engine.attach(midiSynth)
         // with distortion
         engine.connect(midiSynth, to: distortion, format: nil)
         // without distortion
 //        engine.connect(midiSynth, to: engine.mainMixerNode, format: nil)
 
-        print("audio auaudiounit \(midiSynth.AUAudioUnit)")
+        print("audio auaudiounit \(midiSynth.auAudioUnit)")
         print("audio audiounit \(midiSynth.audioUnit)")
         print("audio descr \(midiSynth.audioComponentDescription)")
         
@@ -71,7 +71,7 @@ class SynthSequence : NSObject {
         // must be after the engine has started. Otherwise you will get kAudioUnitErr_Uninitialized
         do {
             try midiSynth.loadPatches(patches)
-        } catch AVAudioUnitMIDISynthError.EngineNotStarted {
+        } catch AVAudioUnitMIDISynthError.engineNotStarted {
             print("Start the engine first!")
             fatalError("setting patches")
         } catch let e as NSError {
@@ -87,7 +87,7 @@ class SynthSequence : NSObject {
         print(self.engine)
         
         // since we have created an AVAudioSequencer, the engine's musicSequence is set.
-        CAShow(UnsafeMutablePointer<MusicSequence>(engine.musicSequence))
+        CAShow(UnsafeMutablePointer<MusicSequence>(engine.musicSequence!))
         
         setSessionPlayback()
         
@@ -99,11 +99,11 @@ class SynthSequence : NSObject {
         
         self.sequencer = AVAudioSequencer(audioEngine: self.engine)
         
-        let options = AVMusicSequenceLoadOptions.SMF_PreserveTracks
+        let options = AVMusicSequenceLoadOptions()
         let musicSequence = createMusicSequence()
         if let data = sequenceData(musicSequence) {
             do {
-                try sequencer.loadFromData(data, options: options)
+                try sequencer.load(from: data, options: options)
                 print("loaded \(data)")
             } catch {
                 print("something screwed up \(error)")
@@ -125,7 +125,7 @@ class SynthSequence : NSObject {
         
         self.sequencer = AVAudioSequencer(audioEngine: self.engine)
         
-        let options = AVMusicSequenceLoadOptions.SMF_PreserveTracks
+        let options = AVMusicSequenceLoadOptions()
 // or
 //        if let fileURL = NSBundle.mainBundle().URLForResource("chromatic2", withExtension: "mid") {
 //            do {
@@ -137,9 +137,9 @@ class SynthSequence : NSObject {
 //            }
 //        }
         
-        if let fileURL = NSBundle.mainBundle().URLForResource("The Legend of Zelda - Koji Kondo - Main Theme (King Meteor)", withExtension: "mid") {
+        if let fileURL = Bundle.main.url(forResource: "The Legend of Zelda - Koji Kondo - Main Theme (King Meteor)", withExtension: "mid") {
             do {
-                try sequencer.loadFromURL(fileURL, options: options)
+                try sequencer.load(from: fileURL, options: options)
                 print("loaded \(fileURL)")
             } catch {
                 print("something screwed up \(error)")
@@ -157,20 +157,20 @@ class SynthSequence : NSObject {
     ///  - parameter musicSequence: the `MusicSequence` that will be converted.
     ///
     ///  - returns: the `NSData` instance.
-    func sequenceData(musicSequence:MusicSequence) -> NSData? {
+    func sequenceData(_ musicSequence:MusicSequence) -> Data? {
         var status = OSStatus(noErr)
         
         var data:Unmanaged<CFData>?
         status = MusicSequenceFileCreateData(musicSequence,
-            MusicSequenceFileTypeID.MIDIType,
-            MusicSequenceFileFlags.EraseFile,
+            MusicSequenceFileTypeID.midiType,
+            MusicSequenceFileFlags.eraseFile,
             480, &data)
         if status != noErr {
             print("error turning MusicSequence into NSData")
             return nil
         }
         
-        let ns:NSData = data!.takeUnretainedValue()
+        let ns:Data = data!.takeUnretainedValue() as Data
         data?.release()
         return ns
     }
@@ -180,37 +180,37 @@ class SynthSequence : NSObject {
     ///  - returns: The `MusicSequence`.
     func createMusicSequence() -> MusicSequence {
         
-        var musicSequence : MusicSequence = nil
+        var musicSequence : MusicSequence? = nil
         var status = NewMusicSequence(&musicSequence)
-        if status != OSStatus(noErr) {
+        if status != noErr {
             print("\(#line) bad status \(status) creating sequence")
         }
         
         // add a track
-        var track : MusicTrack = nil
-        status = MusicSequenceNewTrack(musicSequence, &track)
-        if status != OSStatus(noErr) {
+        var track : MusicTrack? = nil
+        status = MusicSequenceNewTrack(musicSequence!, &track)
+        if status != noErr {
             print("error creating track \(status)")
         }
         
         var channel = UInt8(0)
         // bank select msb
         var chanmess = MIDIChannelMessage(status: 0xB0 | channel, data1: 0, data2: 0, reserved: 0)
-        status = MusicTrackNewMIDIChannelEvent(track, 0, &chanmess)
-        if status != OSStatus(noErr) {
+        status = MusicTrackNewMIDIChannelEvent(track!, 0, &chanmess)
+        if status != noErr {
             print("creating bank select event \(status)")
         }
         // bank select lsb
         chanmess = MIDIChannelMessage(status: 0xB0 | channel, data1: 32, data2: 0, reserved: 0)
-        status = MusicTrackNewMIDIChannelEvent(track, 0, &chanmess)
-        if status != OSStatus(noErr) {
+        status = MusicTrackNewMIDIChannelEvent(track!, 0, &chanmess)
+        if status != noErr {
             print("creating bank select event \(status)")
         }
         
         // program change. first data byte is the patch, the second data byte is unused for program change messages.
         chanmess = MIDIChannelMessage(status: 0xC0 | channel, data1: UInt8(0), data2: 0, reserved: 0)
-        status = MusicTrackNewMIDIChannelEvent(track, 0, &chanmess)
-        if status != OSStatus(noErr) {
+        status = MusicTrackNewMIDIChannelEvent(track!, 0, &chanmess)
+        if status != noErr {
             print("creating program change event \(status)")
         }
         
@@ -222,8 +222,8 @@ class SynthSequence : NSObject {
                 velocity: 64,
                 releaseVelocity: 0,
                 duration: 1.0 )
-            status = MusicTrackNewMIDINoteEvent(track, beat, &mess)
-            if status != OSStatus(noErr) {
+            status = MusicTrackNewMIDINoteEvent(track!, beat, &mess)
+            if status != noErr {
                 print("creating new midi note event \(status)")
             }
             beat += 1
@@ -234,26 +234,26 @@ class SynthSequence : NSObject {
         channel = UInt8(1)
         
         track  = nil
-        status = MusicSequenceNewTrack(musicSequence, &track)
-        if status != OSStatus(noErr) {
+        status = MusicSequenceNewTrack(musicSequence!, &track)
+        if status != noErr {
             print("error creating track \(status)")
         }
         
         chanmess = MIDIChannelMessage(status: 0xB0 | channel, data1: 0, data2: 0, reserved: 0)
-        status = MusicTrackNewMIDIChannelEvent(track, 0, &chanmess)
-        if status != OSStatus(noErr) {
+        status = MusicTrackNewMIDIChannelEvent(track!, 0, &chanmess)
+        if status != noErr {
             print("creating bank select msb event \(status)")
         }
         
         chanmess = MIDIChannelMessage(status: 0xB0 | channel, data1: 32, data2: 0, reserved: 0)
-        status = MusicTrackNewMIDIChannelEvent(track, 0, &chanmess)
-        if status != OSStatus(noErr) {
+        status = MusicTrackNewMIDIChannelEvent(track!, 0, &chanmess)
+        if status != noErr {
             print("creating bank select lsb event \(status)")
         }
         
         chanmess = MIDIChannelMessage(status: 0xC0 | channel, data1: UInt8(46), data2: 0, reserved: 0)
-        status = MusicTrackNewMIDIChannelEvent(track, 0, &chanmess)
-        if status != OSStatus(noErr) {
+        status = MusicTrackNewMIDIChannelEvent(track!, 0, &chanmess)
+        if status != noErr {
             print("creating program change event \(status)")
         }
         
@@ -265,8 +265,8 @@ class SynthSequence : NSObject {
                 releaseVelocity: 0,
                 
                 duration: 1.0 )
-            status = MusicTrackNewMIDINoteEvent(track, beat, &mess)
-            if status != OSStatus(noErr) {
+            status = MusicTrackNewMIDINoteEvent(track!, beat, &mess)
+            if status != noErr {
                 print("creating new midi note event \(status)")
             }
             beat += 1
@@ -279,18 +279,18 @@ class SynthSequence : NSObject {
 //        engine.musicSequence = musicSequence
         
         // Let's see it
-        CAShow(UnsafeMutablePointer<MusicSequence>(musicSequence))
+        CAShow(UnsafeMutablePointer<MusicSequence>(musicSequence!))
         
-        return musicSequence
+        return musicSequence!
     }
 
     ///  Play the sequence.
     func play() {
-        if sequencer.playing {
+        if sequencer.isPlaying {
             stop()
         }
         
-        sequencer.currentPositionInBeats = NSTimeInterval(0)
+        sequencer.currentPositionInBeats = TimeInterval(0)
         
         print("attempting to play")
         do {
@@ -311,7 +311,7 @@ class SynthSequence : NSObject {
         let audioSession = AVAudioSession.sharedInstance()
         do {
             try
-                audioSession.setCategory(AVAudioSessionCategoryPlayback, withOptions: AVAudioSessionCategoryOptions.MixWithOthers)
+                audioSession.setCategory(AVAudioSessionCategoryPlayback, with: AVAudioSessionCategoryOptions.mixWithOthers)
         } catch {
             print("couldn't set category \(error)")
             return
@@ -328,7 +328,7 @@ class SynthSequence : NSObject {
     ///  Start the `AVAudioEngine`
     func startEngine() {
         
-        if engine.running {
+        if engine.isRunning {
             print("audio engine already started")
             return
         }
@@ -345,80 +345,80 @@ class SynthSequence : NSObject {
     //MARK: - Notifications
     
     func addObservers() {
-        NSNotificationCenter.defaultCenter().addObserver(self,
+        NotificationCenter.default.addObserver(self,
             selector:#selector(SynthSequence.engineConfigurationChange(_:)),
-            name:AVAudioEngineConfigurationChangeNotification,
+            name:NSNotification.Name.AVAudioEngineConfigurationChange,
             object:engine)
         
-        NSNotificationCenter.defaultCenter().addObserver(self,
+        NotificationCenter.default.addObserver(self,
             selector:#selector(SynthSequence.sessionInterrupted(_:)),
-            name:AVAudioSessionInterruptionNotification,
+            name:NSNotification.Name.AVAudioSessionInterruption,
             object:engine)
         
-        NSNotificationCenter.defaultCenter().addObserver(self,
+        NotificationCenter.default.addObserver(self,
             selector:#selector(SynthSequence.sessionRouteChange(_:)),
-            name:AVAudioSessionRouteChangeNotification,
+            name:NSNotification.Name.AVAudioSessionRouteChange,
             object:engine)
     }
     
     func removeObservers() {
-        NSNotificationCenter.defaultCenter().removeObserver(self,
-            name: AVAudioEngineConfigurationChangeNotification,
+        NotificationCenter.default.removeObserver(self,
+            name: NSNotification.Name.AVAudioEngineConfigurationChange,
             object: nil)
         
-        NSNotificationCenter.defaultCenter().removeObserver(self,
-            name: AVAudioSessionInterruptionNotification,
+        NotificationCenter.default.removeObserver(self,
+            name: NSNotification.Name.AVAudioSessionInterruption,
             object: nil)
         
-        NSNotificationCenter.defaultCenter().removeObserver(self,
-            name: AVAudioSessionRouteChangeNotification,
+        NotificationCenter.default.removeObserver(self,
+            name: NSNotification.Name.AVAudioSessionRouteChange,
             object: nil)
     }
     
     
     // MARK: notification callbacks
-    func engineConfigurationChange(notification:NSNotification) {
+    func engineConfigurationChange(_ notification:Notification) {
         print("engineConfigurationChange")
     }
     
-    func sessionInterrupted(notification:NSNotification) {
+    func sessionInterrupted(_ notification:Notification) {
         print("audio session interrupted")
         if let engine = notification.object as? AVAudioEngine {
             engine.stop()
         }
         
-        if let userInfo = notification.userInfo as? Dictionary<String,AnyObject!> {
+        if let userInfo = (notification as NSNotification).userInfo as? Dictionary<String,AnyObject?> {
             let reason = userInfo[AVAudioSessionInterruptionTypeKey] as! AVAudioSessionInterruptionType
             switch reason {
-            case .Began:
+            case .began:
                 print("began")
-            case .Ended:
+            case .ended:
                 print("ended")
             }
         }
     }
     
-    func sessionRouteChange(notification:NSNotification) {
+    func sessionRouteChange(_ notification:Notification) {
         print("sessionRouteChange")
         if let engine = notification.object as? AVAudioEngine {
             engine.stop()
         }
         
-        if let userInfo = notification.userInfo as? Dictionary<String,AnyObject!> {
+        if let userInfo = (notification as NSNotification).userInfo as? Dictionary<String,AnyObject?> {
             
             if let reason = userInfo[AVAudioSessionRouteChangeReasonKey] as? AVAudioSessionRouteChangeReason {
                 
                 print("audio session route change reason \(reason)")
                 
                 switch reason {
-                case .CategoryChange: print("CategoryChange")
-                case .NewDeviceAvailable:print("NewDeviceAvailable")
-                case .NoSuitableRouteForCategory:print("NoSuitableRouteForCategory")
-                case .OldDeviceUnavailable:print("OldDeviceUnavailable")
-                case .Override: print("Override")
-                case .WakeFromSleep:print("WakeFromSleep")
-                case .Unknown:print("Unknown")
-                case .RouteConfigurationChange:print("RouteConfigurationChange")
+                case .categoryChange: print("CategoryChange")
+                case .newDeviceAvailable:print("NewDeviceAvailable")
+                case .noSuitableRouteForCategory:print("NoSuitableRouteForCategory")
+                case .oldDeviceUnavailable:print("OldDeviceUnavailable")
+                case .override: print("Override")
+                case .wakeFromSleep:print("WakeFromSleep")
+                case .unknown:print("Unknown")
+                case .routeConfigurationChange:print("RouteConfigurationChange")
                 }
             }
             

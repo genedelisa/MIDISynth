@@ -20,13 +20,13 @@ import CoreAudio
 /// - date: February 2016
 class AudioUnitMIDISynth : NSObject {
     
-    var processingGraph = AUGraph()
+    var processingGraph: AUGraph?
     var midisynthNode   = AUNode()
     var ioNode          = AUNode()
-    var midisynthUnit   = AudioUnit()
-    var ioUnit          = AudioUnit()
-    var musicSequence   = MusicSequence()
-    var musicPlayer     = MusicPlayer()
+    var midisynthUnit: AudioUnit?
+    var ioUnit: AudioUnit?
+    var musicSequence: MusicSequence!
+    var musicPlayer: MusicPlayer!
     /// Harp
     let patch1          = UInt32(46)
     /// Piano
@@ -63,20 +63,20 @@ class AudioUnitMIDISynth : NSObject {
         createSynthNode()
         
         // now do the wiring. The graph needs to be open before you call AUGraphNodeInfo
-        status = AUGraphOpen(self.processingGraph)
+        status = AUGraphOpen(self.processingGraph!)
         AudioUtils.CheckError(status)
         
-        status = AUGraphNodeInfo(self.processingGraph, self.midisynthNode, nil, &midisynthUnit)
+        status = AUGraphNodeInfo(self.processingGraph!, self.midisynthNode, nil, &midisynthUnit)
         AudioUtils.CheckError(status)
         
-        status = AUGraphNodeInfo(self.processingGraph, self.ioNode, nil, &ioUnit)
+        status = AUGraphNodeInfo(self.processingGraph!, self.ioNode, nil, &ioUnit)
         AudioUtils.CheckError(status)
         
         
         let synthOutputElement:AudioUnitElement = 0
         let ioUnitInputElement:AudioUnitElement = 0
         
-        status = AUGraphConnectNodeInput(self.processingGraph,
+        status = AUGraphConnectNodeInput(self.processingGraph!,
             self.midisynthNode, synthOutputElement, // srcnode, SourceOutputNumber
             self.ioNode, ioUnitInputElement) // destnode, DestInputNumber
         
@@ -90,7 +90,7 @@ class AudioUnitMIDISynth : NSObject {
             componentSubType: OSType(kAudioUnitSubType_RemoteIO),
             componentManufacturer: OSType(kAudioUnitManufacturer_Apple),
             componentFlags: 0,componentFlagsMask: 0)
-        let status = AUGraphAddNode(self.processingGraph, &cd, &ioNode)
+        let status = AUGraphAddNode(self.processingGraph!, &cd, &ioNode)
         AudioUtils.CheckError(status)
     }
     
@@ -101,7 +101,7 @@ class AudioUnitMIDISynth : NSObject {
             componentSubType: OSType(kAudioUnitSubType_MIDISynth),
             componentManufacturer: OSType(kAudioUnitManufacturer_Apple),
             componentFlags: 0,componentFlagsMask: 0)
-        let status = AUGraphAddNode(self.processingGraph, &cd, &midisynthNode)
+        let status = AUGraphAddNode(self.processingGraph!, &cd, &midisynthNode)
         AudioUtils.CheckError(status)
     }
     
@@ -112,15 +112,15 @@ class AudioUnitMIDISynth : NSObject {
     /// - postcondition: `self.midisynthUnit` will have it's sound font url set.
     func loadMIDISynthSoundFont()  {
         
-        if var bankURL = NSBundle.mainBundle().URLForResource("FluidR3 GM2-2", withExtension: "SF2")  {
+        if var bankURL = Bundle.main.url(forResource: "FluidR3 GM2-2", withExtension: "SF2")  {
             
             let status = AudioUnitSetProperty(
-                self.midisynthUnit,
+                self.midisynthUnit!,
                 AudioUnitPropertyID(kMusicDeviceProperty_SoundBankURL),
                 AudioUnitScope(kAudioUnitScope_Global),
                 0,
                 &bankURL,
-                UInt32(sizeof(bankURL.dynamicType)))
+                UInt32(MemoryLayout<URL>.size))
             
             AudioUtils.CheckError(status)
         } else {
@@ -150,31 +150,31 @@ class AudioUnitMIDISynth : NSObject {
         var enabled = UInt32(1)
         
         var status = AudioUnitSetProperty(
-            self.midisynthUnit,
+            self.midisynthUnit!,
             AudioUnitPropertyID(kAUMIDISynthProperty_EnablePreload),
             AudioUnitScope(kAudioUnitScope_Global),
             0,
             &enabled,
-            UInt32(sizeof(UInt32)))
+            UInt32(MemoryLayout<UInt32>.size))
         AudioUtils.CheckError(status)
         
         //        let bankSelectCommand = UInt32(0xB0 | 0)
         //        status = MusicDeviceMIDIEvent(self.midisynthUnit, bankSelectCommand, 0, 0, 0)
         
         let pcCommand = UInt32(0xC0 | channel)
-        status = MusicDeviceMIDIEvent(self.midisynthUnit, pcCommand, patch1, 0, 0)
+        status = MusicDeviceMIDIEvent(self.midisynthUnit!, pcCommand, patch1, 0, 0)
         AudioUtils.CheckError(status)
-        status = MusicDeviceMIDIEvent(self.midisynthUnit, pcCommand, patch2, 0, 0)
+        status = MusicDeviceMIDIEvent(self.midisynthUnit!, pcCommand, patch2, 0, 0)
         AudioUtils.CheckError(status)
         
         enabled = UInt32(0)
         status = AudioUnitSetProperty(
-            self.midisynthUnit,
+            self.midisynthUnit!,
             AudioUnitPropertyID(kAUMIDISynthProperty_EnablePreload),
             AudioUnitScope(kAudioUnitScope_Global),
             0,
             &enabled,
-            UInt32(sizeof(UInt32)))
+            UInt32(MemoryLayout<UInt32>.size))
         AudioUtils.CheckError(status)
         
         // at this point the patches are loaded. You still have to send a program change at "play time" for the synth
@@ -182,26 +182,26 @@ class AudioUnitMIDISynth : NSObject {
     }
     
     
-    /// Check to see if the `AUGraph` is Initialize.
+    /// Check to see if the `AUGraph` is Initialized.
     ///
     /// - returns: `true` if it's running, `false` if not
     /// - seealso: [AUGraphIsInitialized](/https://developer.apple.com/library/prerelease/ios/documentation/AudioToolbox/Reference/AUGraphServicesReference/index.html#//apple_ref/c/func/AUGraphIsInitialized)
     func isGraphInitialized() -> Bool {
         var outIsInitialized = DarwinBoolean(false)
-        let status = AUGraphIsInitialized(self.processingGraph, &outIsInitialized)
+        let status = AUGraphIsInitialized(self.processingGraph!, &outIsInitialized)
         AudioUtils.CheckError(status)
-        return Bool(outIsInitialized)
+        return outIsInitialized.boolValue
     }
     
     /// Initializes the `AUGraph.
     func initializeGraph() {
-        let status = AUGraphInitialize(self.processingGraph)
+        let status = AUGraphInitialize(self.processingGraph!)
         AudioUtils.CheckError(status)
     }
     
     /// Starts the `AUGraph`
     func startGraph() {
-        let status = AUGraphStart(self.processingGraph)
+        let status = AUGraphStart(self.processingGraph!)
         AudioUtils.CheckError(status)
     }
     
@@ -210,9 +210,9 @@ class AudioUnitMIDISynth : NSObject {
     /// - returns: `true` if it's running, `false` if not
     func isGraphRunning() -> Bool {
         var isRunning = DarwinBoolean(false)
-        let status = AUGraphIsRunning(self.processingGraph, &isRunning)
+        let status = AUGraphIsRunning(self.processingGraph!, &isRunning)
         AudioUtils.CheckError(status)
-        return Bool(isRunning)
+        return isRunning.boolValue
     }
     
     /// Generate a random pitch between 36 (C below middle C) and 100.
@@ -232,9 +232,9 @@ class AudioUnitMIDISynth : NSObject {
         
         generateRandomPitch()
         print(pitch)
-        status = MusicDeviceMIDIEvent(self.midisynthUnit, pcCommand, patch1, 0, 0)
+        status = MusicDeviceMIDIEvent(self.midisynthUnit!, pcCommand, patch1, 0, 0)
         AudioUtils.CheckError(status)
-        status = MusicDeviceMIDIEvent(self.midisynthUnit, noteCommand, pitch, 64, 0)
+        status = MusicDeviceMIDIEvent(self.midisynthUnit!, noteCommand, pitch, 64, 0)
         AudioUtils.CheckError(status)
     }
     
@@ -243,7 +243,7 @@ class AudioUnitMIDISynth : NSObject {
         let channel = UInt32(0)
         let noteCommand = UInt32(0x80 | channel)
         var status = OSStatus(noErr)
-        status = MusicDeviceMIDIEvent(self.midisynthUnit, noteCommand, pitch, 0, 0)
+        status = MusicDeviceMIDIEvent(self.midisynthUnit!, noteCommand, pitch, 0, 0)
         AudioUtils.CheckError(status)
     }
     
@@ -257,9 +257,9 @@ class AudioUnitMIDISynth : NSObject {
         
         generateRandomPitch()
         print(pitch)
-        status = MusicDeviceMIDIEvent(self.midisynthUnit, pcCommand, patch2, 0, 0)
+        status = MusicDeviceMIDIEvent(self.midisynthUnit!, pcCommand, patch2, 0, 0)
         AudioUtils.CheckError(status)
-        status = MusicDeviceMIDIEvent(self.midisynthUnit, noteCommand, pitch, 64, 0)
+        status = MusicDeviceMIDIEvent(self.midisynthUnit!, noteCommand, pitch, 64, 0)
         AudioUtils.CheckError(status)
     }
     
@@ -268,7 +268,7 @@ class AudioUnitMIDISynth : NSObject {
         let channel = UInt32(0)
         let noteCommand = UInt32(0x80 | channel)
         var status = OSStatus(noErr)
-        status = MusicDeviceMIDIEvent(self.midisynthUnit, noteCommand, pitch, 0, 0)
+        status = MusicDeviceMIDIEvent(self.midisynthUnit!, noteCommand, pitch, 0, 0)
         AudioUtils.CheckError(status)
     }
     
@@ -280,37 +280,37 @@ class AudioUnitMIDISynth : NSObject {
     /// - returns: a `MusicSequence`
     func createMusicSequence() -> MusicSequence {
         
-        var musicSequence = MusicSequence()
+        var musicSequence:MusicSequence?
         var status = NewMusicSequence(&musicSequence)
-        if status != OSStatus(noErr) {
-            print("\(__LINE__) bad status \(status) creating sequence")
+        if status != noErr {
+            print("\(#line) bad status \(status) creating sequence")
         }
         
         // add a track
-        var track = MusicTrack()
-        status = MusicSequenceNewTrack(musicSequence, &track)
-        if status != OSStatus(noErr) {
+        var track: MusicTrack?
+        status = MusicSequenceNewTrack(musicSequence!, &track)
+        if status != noErr {
             print("error creating track \(status)")
         }
         
         var channel = UInt8(0)
         // bank select msb
         var chanmess = MIDIChannelMessage(status: 0xB0 | channel, data1: 0, data2: 0, reserved: 0)
-        status = MusicTrackNewMIDIChannelEvent(track, 0, &chanmess)
-        if status != OSStatus(noErr) {
+        status = MusicTrackNewMIDIChannelEvent(track!, 0, &chanmess)
+        if status != noErr {
             print("creating bank select event \(status)")
         }
         // bank select lsb
         chanmess = MIDIChannelMessage(status: 0xB0 | channel, data1: 32, data2: 0, reserved: 0)
-        status = MusicTrackNewMIDIChannelEvent(track, 0, &chanmess)
-        if status != OSStatus(noErr) {
+        status = MusicTrackNewMIDIChannelEvent(track!, 0, &chanmess)
+        if status != noErr {
             print("creating bank select event \(status)")
         }
         
         // program change. first data byte is the patch, the second data byte is unused for program change messages.
         chanmess = MIDIChannelMessage(status: 0xC0 | channel, data1: UInt8(patch1), data2: 0, reserved: 0)
-        status = MusicTrackNewMIDIChannelEvent(track, 0, &chanmess)
-        if status != OSStatus(noErr) {
+        status = MusicTrackNewMIDIChannelEvent(track!, 0, &chanmess)
+        if status != noErr {
             print("creating program change event \(status)")
         }
         
@@ -322,38 +322,38 @@ class AudioUnitMIDISynth : NSObject {
                 velocity: 64,
                 releaseVelocity: 0,
                 duration: 1.0 )
-            status = MusicTrackNewMIDINoteEvent(track, beat, &mess)
-            if status != OSStatus(noErr) {
+            status = MusicTrackNewMIDINoteEvent(track!, beat, &mess)
+            if status != noErr {
                 print("creating new midi note event \(status)")
             }
-            beat++
+            beat += 1
         }
         
         // another track
         
         channel = UInt8(1)
         
-        track = MusicTrack()
-        status = MusicSequenceNewTrack(musicSequence, &track)
-        if status != OSStatus(noErr) {
+        track = nil
+        status = MusicSequenceNewTrack(musicSequence!, &track)
+        if status != noErr {
             print("error creating track \(status)")
         }
         
         chanmess = MIDIChannelMessage(status: 0xB0 | channel, data1: 0, data2: 0, reserved: 0)
-        status = MusicTrackNewMIDIChannelEvent(track, 0, &chanmess)
-        if status != OSStatus(noErr) {
+        status = MusicTrackNewMIDIChannelEvent(track!, 0, &chanmess)
+        if status != noErr {
             print("creating bank select msb event \(status)")
         }
         
         chanmess = MIDIChannelMessage(status: 0xB0 | channel, data1: 32, data2: 0, reserved: 0)
-        status = MusicTrackNewMIDIChannelEvent(track, 0, &chanmess)
-        if status != OSStatus(noErr) {
+        status = MusicTrackNewMIDIChannelEvent(track!, 0, &chanmess)
+        if status != noErr {
             print("creating bank select lsb event \(status)")
         }
         
         chanmess = MIDIChannelMessage(status: 0xC0 | channel, data1: UInt8(patch2), data2: 0, reserved: 0)
-        status = MusicTrackNewMIDIChannelEvent(track, 0, &chanmess)
-        if status != OSStatus(noErr) {
+        status = MusicTrackNewMIDIChannelEvent(track!, 0, &chanmess)
+        if status != noErr {
             print("creating program change event \(status)")
         }
         
@@ -365,20 +365,20 @@ class AudioUnitMIDISynth : NSObject {
                 releaseVelocity: 0,
                 
                 duration: 1.0 )
-            status = MusicTrackNewMIDINoteEvent(track, beat, &mess)
+            status = MusicTrackNewMIDINoteEvent(track!, beat, &mess)
             if status != OSStatus(noErr) {
                 print("creating new midi note event \(status)")
             }
-            beat++
+            beat += 1
         }
         
         // associate the AUGraph with the sequence.
-        status = MusicSequenceSetAUGraph(musicSequence, self.processingGraph)
+        status = MusicSequenceSetAUGraph(musicSequence!, self.processingGraph)
         
         // Let's see it
-        CAShow(UnsafeMutablePointer<MusicSequence>(musicSequence))
+        CAShow(UnsafeMutablePointer<MusicSequence>(musicSequence!))
         
-        return musicSequence
+        return musicSequence!
     }
     
     /// Create a `MusicPlayer` with the specified sequence.
@@ -388,38 +388,38 @@ class AudioUnitMIDISynth : NSObject {
     /// - throws: Nothing, but it should
     /// - todo: create an `ErrorType` ennum
     /// - returns: a `MusicPlayer`
-    func createPlayer(musicSequence:MusicSequence) -> MusicPlayer {
-        var musicPlayer = MusicPlayer()
-        var status = OSStatus(noErr)
-        status = NewMusicPlayer(&musicPlayer)
+    func createPlayer(_ musicSequence:MusicSequence) -> MusicPlayer {
+        var musicPlayer:MusicPlayer?
+
+        var status = NewMusicPlayer(&musicPlayer)
         if status != OSStatus(noErr) {
             print("bad status \(status) creating player")
             AudioUtils.CheckError(status)
         }
         
-        status = MusicPlayerSetSequence(musicPlayer, musicSequence)
+        status = MusicPlayerSetSequence(musicPlayer!, musicSequence)
         if status != OSStatus(noErr) {
             print("setting sequence \(status)")
             AudioUtils.CheckError(status)
         }
-        status = MusicPlayerPreroll(musicPlayer)
+        status = MusicPlayerPreroll(musicPlayer!)
         if status != OSStatus(noErr) {
             print("prerolling player \(status)")
             AudioUtils.CheckError(status)
         }
-        return musicPlayer
+        return musicPlayer!
     }
     
     /// Make the `MusicPlayer` play its sequence
     /// - throws: Nothing, but it should
     /// - todo: create an `ErrorType` ennum
     func musicPlayerPlay() {
-        var status = OSStatus(noErr)
+        var status = noErr
         var playing:DarwinBoolean = false
         status = MusicPlayerIsPlaying(musicPlayer, &playing)
         if playing != false {
             status = MusicPlayerStop(musicPlayer)
-            if status != OSStatus(noErr) {
+            if status != noErr {
                 print("Error stopping \(status)")
                 AudioUtils.CheckError(status)
                 return
@@ -427,14 +427,14 @@ class AudioUnitMIDISynth : NSObject {
         }
         
         status = MusicPlayerSetTime(musicPlayer, 0)
-        if status != OSStatus(noErr) {
+        if status != noErr {
             print("setting time \(status)")
             AudioUtils.CheckError(status)
             return
         }
         
         status = MusicPlayerStart(musicPlayer)
-        if status != OSStatus(noErr) {
+        if status != noErr {
             print("Error starting \(status)")
             AudioUtils.CheckError(status)
             return

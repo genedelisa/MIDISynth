@@ -8,5 +8,5 @@ clean: true
 copyright: "2016 © Gene De Lisa. See LICENSE for more details. [Rockhopper Technologies](http://rockhoppertech.com/)"
 readme_path: ./README.md
 output: docs/swiftDocs
-swift_version: 2.1.1
+swift_version: 3.0
 xcodebuild-arguments: -scheme,MIDISynth

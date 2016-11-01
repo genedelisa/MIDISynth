@@ -32,9 +32,9 @@ import AVFoundation
 /// - author: Gene De Lisa
 /// - copyright: 2016 Gene De Lisa
 /// - date: February 2016
-public class AudioUtils {
+open class AudioUtils {
     
-    private init(){
+    fileprivate init(){
     }
     
     
@@ -44,31 +44,31 @@ public class AudioUtils {
     ///  - parameter n: The encoded 4char
     ///
     ///  - returns: The String representation.
-    class func stringFrom4(n: Int) -> String {
+    class func stringFrom4(_ n: Int) -> String {
 
         var scalar = UnicodeScalar((n >> 24) & 255)
-        if !scalar.isASCII() {
+        if !scalar!.isASCII {
             return ""
         }
-        var s = String(scalar)
+        var s = String(describing: scalar)
         
         scalar = UnicodeScalar((n >> 16) & 255)
-        if !scalar.isASCII() {
+        if !scalar!.isASCII {
             return ""
         }
-        s.append(scalar)
+        s.append(String(describing: scalar))
         
         scalar = UnicodeScalar((n >> 8) & 255)
-        if !scalar.isASCII() {
+        if !scalar!.isASCII {
             return ""
         }
-        s.append(scalar)
+        s.append(String(describing: scalar))
         
         scalar = UnicodeScalar(n & 255)
-        if !scalar.isASCII() {
+        if !scalar!.isASCII {
             return ""
         }
-        s.append(scalar)
+        s.append(String(describing: scalar))
         
         
         return s
@@ -79,7 +79,7 @@ public class AudioUtils {
     ///  - parameter status: an `OSStatus` containing the encoded 4char.
     ///
     ///  - returns: The String representation.
-    class func stringFrom4(status: OSStatus) -> String {
+    class func stringFrom4(_ status: OSStatus) -> String {
         let n = Int(status)
         return stringFrom4(n)
     }
@@ -89,17 +89,17 @@ public class AudioUtils {
     ///  - parameter s: The String.
     ///
     ///  - returns: the encoded Int
-    class func valueFromString4(s: String) -> Int {
+    class func valueFromString4(_ s: String) -> Int {
         var n = 0
         var r = ""
         
         if s.characters.count > 4 {
-            let startIndex = s.startIndex.advancedBy(4)
-            r = s.substringFromIndex(startIndex)
+            let startIndex = s.characters.index(s.startIndex, offsetBy: 4)
+            r = s.substring(from: startIndex)
         } else {
             r = s + "    "
-            let startIndex = s.startIndex.advancedBy(4)
-            r = r.substringToIndex(startIndex)
+            let startIndex = s.characters.index(s.startIndex, offsetBy: 4)
+            r = r.substring(to: startIndex)
         }
         
         for UniCodeChar in r.unicodeScalars {
@@ -162,7 +162,7 @@ public class AudioUtils {
     ///  Print a description of the status code to stdout if it's an error.
     ///
     ///  - parameter status: the status to check.
-    class func CheckError(status:OSStatus) {
+    class func CheckError(_ status:OSStatus) {
         
         if status == noErr {
             return

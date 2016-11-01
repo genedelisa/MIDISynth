@@ -27,28 +27,28 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func patch1On(sender:UIButton) {
+    @IBAction func patch1On(_ sender:UIButton) {
         au.playPatch1On()
     }
     
-    @IBAction func patch1Off(sender:UIButton) {
+    @IBAction func patch1Off(_ sender:UIButton) {
         au.playPatch1Off()
     }
     
     
-    @IBAction func patch2On(sender:UIButton) {
+    @IBAction func patch2On(_ sender:UIButton) {
         au.playPatch2On()
     }
     
-    @IBAction func patch2Off(sender:UIButton) {
+    @IBAction func patch2Off(_ sender:UIButton) {
         au.playPatch2Off()
     }
 
-    @IBAction func playSequence(sender:UIButton) {
+    @IBAction func playSequence(_ sender:UIButton) {
         au.musicPlayerPlay()
     }
     
-    @IBAction func playSS(sender:UIButton) {
+    @IBAction func playSS(_ sender:UIButton) {
         print("sending play message")
         ss.play()
     }

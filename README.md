@@ -5,7 +5,7 @@
 [![Build Status](https://travis-ci.org/genedelisa/MIDISynth.svg)](https://travis-ci.org/genedelisa/MIDISynth)
 [![GitHub tag](https://img.shields.io/github/tag/genedelisa/MIDISynth.svg)](https://github.com/genedelisa/MIDISynth/)
 [![GitHub release](https://img.shields.io/github/release/genedelisa/MIDISynth.svg)](https://github.com/genedelisa/MIDISynth/)
-[![Swift 2](https://img.shields.io/badge/swift2-compatible-4BC51D.svg?style=flat")](https://developer.apple.com/swift)
+[![Swift 3](https://img.shields.io/badge/swift3-compatible-4BC51D.svg?style=flat")](https://developer.apple.com/swift)
 
 
 [![Platforms OS X | iOS](https://img.shields.io/badge/Platforms-OS%20X%20%7C%20iOS-lightgray.svg?style=flat)](https://swift.org/)

@@ -42,7 +42,7 @@ class AVAudioUnitDistortionEffect: AVAudioUnitEffect {
         super.init(audioComponentDescription: description)
     }
     
-    func setFinalMix(finalMix:Float) {
+    func setFinalMix(_ finalMix:Float) {
 
         let status = AudioUnitSetParameter(
             self.audioUnit,
@@ -57,13 +57,13 @@ class AVAudioUnitDistortionEffect: AVAudioUnitEffect {
         }
     }
 
-    func setDelay(value:Float) {
+    func setDelay(_ value:Float) {
         setAudioUnitParameterValue(audioUnit, parameterType: kDistortionParam_Delay, value: 0.0)
     }
     // etc for the rest
     
     
-    func getAudioUnitParameterValue(audioUnit:AudioUnit , parameterType:AudioUnitParameterID ) -> Float {
+    func getAudioUnitParameterValue(_ audioUnit:AudioUnit , parameterType:AudioUnitParameterID ) -> Float {
         
         var value = AudioUnitParameterValue(0.0)
         let status = AudioUnitGetParameter(audioUnit,
@@ -78,7 +78,7 @@ class AVAudioUnitDistortionEffect: AVAudioUnitEffect {
         }
     }
     
-    func setAudioUnitParameterValue(audioUnit:AudioUnit , parameterType:AudioUnitParameterID,  value:Float) {
+    func setAudioUnitParameterValue(_ audioUnit:AudioUnit , parameterType:AudioUnitParameterID,  value:Float) {
         
         let status = AudioUnitSetParameter(audioUnit,
                                            parameterType,
