@@ -5,7 +5,7 @@
 [![Build Status](https://travis-ci.org/genedelisa/MIDISynth.svg)](https://travis-ci.org/genedelisa/MIDISynth)
 [![GitHub version](https://badge.fury.io/gh/genedelisa%2FMIDISynth.svg)](https://github.com/genedelisa/MIDISynth)
 [![GitHub tag](https://img.shields.io/github/tag/genedelisa/MIDISynth.svg)](https://github.com/genedelisa/MIDISynth/)
-[![GitHub release](https://img.shields.io/github/release/genedelisa/MIDISynth)](https://github.com/genedelisa/MIDISynth/releases/)
+[![GitHub release](https://img.shields.io/github/genedelisa/MIDISynth/release)](https://github.com/genedelisa/MIDISynth/releases/)
 [![GitHub commits](https://img.shields.io/github/commits-since/genedelisa/MIDISynth/v1.0.0.svg)](https://GitHub.com/genedelisa/MIDISynth/commit/)
 [![Github downloads](https://img.shields.io/github/downloads/genedelisa/MIDISynth/total.svg)](https://GitHub.com/genedelisa/MIDISynth/releases/)
 [![GitHub stars](https://img.shields.io/github/stars/genedelisa/MIDISynth.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/genedelisa/SamplerParams/stargazers/)
