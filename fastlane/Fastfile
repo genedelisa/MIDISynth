@@ -1,0 +1,103 @@
+# Customise this file, documentation can be found here:
+# https://github.com/fastlane/fastlane/tree/master/fastlane/docs
+# All available actions: https://docs.fastlane.tools/actions
+# can also be listed using the `fastlane actions` command
+
+# Change the syntax highlighting to Ruby
+# All lines starting with a # are ignored when running `fastlane`
+
+# If you want to automatically update fastlane if a new version is available:
+# update_fastlane
+
+# This is the minimum version number required.
+# Update this, if you use features of a newer version
+fastlane_version "2.37.0"
+
+default_platform :ios
+
+platform :ios do
+  before_all do
+     ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
+    # cocoapods
+  end
+
+  desc "Runs all the tests"
+  lane :test do
+    scan
+  end
+
+  desc "Submit a new Beta Build to Apple TestFlight"
+  desc "This will also make sure the profile is up to date"
+  lane :beta do
+
+   increment_build_number
+
+  #   build your iOS app
+    gym(
+       scheme: "MIDISynth",
+      # export_method: "ad-hoc"
+    )
+
+    # match(type: "appstore") # more information: https://codesigning.guide
+    #gym # Build your app - more options available
+
+    # pilot will Upload a new binary to iTunes Connect for TestFlight beta testing
+# pilot
+
+    # sh "your_script.sh"
+    # You can also use other beta testing services here (run `fastlane actions`)
+  end
+
+  desc "Deploy a new version to the App Store"
+  lane :release do
+    # match(type: "appstore")
+    # snapshot
+    gym # Build your app - more options available
+    deliver(force: true)
+    # frameit
+  end
+
+  # You can define as many lanes as you want
+
+ desc "Creates new screenshots and uploads them to iTunes Connect"
+  lane :screens do
+    cocoapods
+    match(app_identifier: "com.rockhoppertech.MIDISynth", type: "development")
+    snapshot
+    frameit
+    #deliver(app: 925311796, app_identifier: "com.acast.app.native.production", skip_metadata: true, force: true)
+  end
+
+ desc "Creates new screenshots "
+ lane :snappy do |options|
+   snapshot(
+     #project: 'Example.xcodeproj',
+     scheme: 'MIDISynthUITests',
+     # devices: ['iPhone 6s', 'iPad Air'],
+     output_simulator_logs: true
+   )
+ end
+
+  after_all do |lane|
+    # This block is called, only if the executed lane was successful
+
+     slack(
+       message: "Successfully deployed new App Update."
+     )
+  end
+
+  error do |lane, exception|
+     slack(
+       message: exception.message,
+       success: false
+     )
+  end
+
+end
+
+
+# More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
+# All available actions: https://docs.fastlane.tools/actions
+
+# fastlane reports which actions are used. No personal data is recorded. 
+# Learn more at https://github.com/fastlane/fastlane#metrics

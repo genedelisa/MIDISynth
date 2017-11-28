@@ -1,0 +1,11 @@
+# The bundle identifier of your app
+app_identifier "com.rockhoppertech.MIDISynth"
+
+# Your Apple email address
+apple_id "genedelisa@gmail.com"
+
+# Developer Portal Team ID
+team_id "4UDK2944TW"
+
+# you can even provide different app identifiers, Apple IDs and team names per lane:
+# More information: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Appfile.md

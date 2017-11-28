@@ -24,7 +24,10 @@
 		B0099CD71D47E6E30082D8B2 /* FluidR3 GM2-2.SF2 in Resources */ = {isa = PBXBuildFile; fileRef = B0099CD61D47E6E30082D8B2 /* FluidR3 GM2-2.SF2 */; };
 		B0099CD91D47E7100082D8B2 /* chromatic2.mid in Resources */ = {isa = PBXBuildFile; fileRef = B0099CD81D47E7100082D8B2 /* chromatic2.mid */; };
 		B0099CDB1D47E7880082D8B2 /* The Legend of Zelda - Koji Kondo - Main Theme (King Meteor).mid in Resources */ = {isa = PBXBuildFile; fileRef = B0099CDA1D47E7880082D8B2 /* The Legend of Zelda - Koji Kondo - Main Theme (King Meteor).mid */; };
-		B05023171C6A219D00ACED32 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = B05023151C6A219D00ACED32 /* .swiftlint.yml */; };
+		B037FF561FCDA6BF00BC217D /* .swift-version in Resources */ = {isa = PBXBuildFile; fileRef = B037FF531FCDA6BE00BC217D /* .swift-version */; };
+		B037FF571FCDA6BF00BC217D /* fastlane in Resources */ = {isa = PBXBuildFile; fileRef = B037FF541FCDA6BF00BC217D /* fastlane */; };
+		B037FF581FCDA6BF00BC217D /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = B037FF551FCDA6BF00BC217D /* .swiftlint.yml */; };
+		B0390D0A1E9FAC07008A4371 /* GeneralUser GS v1.471.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = B0390D091E9FAC07008A4371 /* GeneralUser GS v1.471.sf2 */; };
 		B08053C01C67811E0018095B /* AudioUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08053BF1C67811E0018095B /* AudioUtils.swift */; };
 		B09AD28C1C6B71DC0050DB1D /* .jazzy.yaml in Resources */ = {isa = PBXBuildFile; fileRef = B09AD28B1C6B71DC0050DB1D /* .jazzy.yaml */; };
 		B09AD28E1C6B72900050DB1D /* docs in Resources */ = {isa = PBXBuildFile; fileRef = B09AD28D1C6B72900050DB1D /* docs */; };
@@ -59,7 +62,10 @@
 		B0099CD61D47E6E30082D8B2 /* FluidR3 GM2-2.SF2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FluidR3 GM2-2.SF2"; sourceTree = "<group>"; };
 		B0099CD81D47E7100082D8B2 /* chromatic2.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = chromatic2.mid; sourceTree = "<group>"; };
 		B0099CDA1D47E7880082D8B2 /* The Legend of Zelda - Koji Kondo - Main Theme (King Meteor).mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = "The Legend of Zelda - Koji Kondo - Main Theme (King Meteor).mid"; sourceTree = "<group>"; };
-		B05023151C6A219D00ACED32 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
+		B037FF531FCDA6BE00BC217D /* .swift-version */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ".swift-version"; sourceTree = "<group>"; };
+		B037FF541FCDA6BF00BC217D /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fastlane; sourceTree = "<group>"; };
+		B037FF551FCDA6BF00BC217D /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
+		B0390D091E9FAC07008A4371 /* GeneralUser GS v1.471.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GeneralUser GS v1.471.sf2"; sourceTree = "<group>"; };
 		B08053BF1C67811E0018095B /* AudioUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioUtils.swift; sourceTree = "<group>"; };
 		B09AD28B1C6B71DC0050DB1D /* .jazzy.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .jazzy.yaml; path = ../.jazzy.yaml; sourceTree = "<group>"; };
 		B09AD28D1C6B72900050DB1D /* docs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = docs; sourceTree = "<group>"; };
@@ -108,6 +114,7 @@
 		B05022FB1C68E9B200ACED32 /* media */ = {
 			isa = PBXGroup;
 			children = (
+				B0390D091E9FAC07008A4371 /* GeneralUser GS v1.471.sf2 */,
 				B0099CDA1D47E7880082D8B2 /* The Legend of Zelda - Koji Kondo - Main Theme (King Meteor).mid */,
 				B0099CD81D47E7100082D8B2 /* chromatic2.mid */,
 				B0099CD61D47E6E30082D8B2 /* FluidR3 GM2-2.SF2 */,
@@ -118,6 +125,9 @@
 		B0E9F6A71B5D52940035EEBA = {
 			isa = PBXGroup;
 			children = (
+				B037FF531FCDA6BE00BC217D /* .swift-version */,
+				B037FF551FCDA6BF00BC217D /* .swiftlint.yml */,
+				B037FF541FCDA6BF00BC217D /* fastlane */,
 				B09AD28D1C6B72900050DB1D /* docs */,
 				B0E9F6E01B5D55600035EEBA /* CoreMIDI.framework */,
 				B0E9F6DE1B5D55550035EEBA /* CoreAudio.framework */,
@@ -160,7 +170,6 @@
 			isa = PBXGroup;
 			children = (
 				B09AD28B1C6B71DC0050DB1D /* .jazzy.yaml */,
-				B05023151C6A219D00ACED32 /* .swiftlint.yml */,
 				B0E9F6B81B5D52950035EEBA /* README.md */,
 				B0E9F6BA1B5D52950035EEBA /* LICENSE */,
 				B0E9F6BC1B5D52950035EEBA /* .gitignore */,
@@ -185,6 +194,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B0E9F6D61B5D52950035EEBA /* Build configuration list for PBXNativeTarget "MIDISynth" */;
 			buildPhases = (
+				B037FF591FCDA75B00BC217D /* ShellScript */,
 				B0E9F6AC1B5D52950035EEBA /* Sources */,
 				B0E9F6AD1B5D52950035EEBA /* Frameworks */,
 				B0E9F6AE1B5D52950035EEBA /* Resources */,
@@ -222,7 +232,7 @@
 		B0E9F6A81B5D52940035EEBA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = "Gene De Lisa";
 				TargetAttributes = {
 					B050231D1C6A92F500ACED32 = {
@@ -231,12 +241,12 @@
 					B0E9F6AF1B5D52950035EEBA = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = 4UDK2944TW;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0910;
 					};
 					B0E9F6CC1B5D52950035EEBA = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = 4UDK2944TW;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0910;
 						TestTargetID = B0E9F6AF1B5D52950035EEBA;
 					};
 				};
@@ -266,11 +276,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B05023171C6A219D00ACED32 /* .swiftlint.yml in Resources */,
+				B0390D0A1E9FAC07008A4371 /* GeneralUser GS v1.471.sf2 in Resources */,
 				B0099CD71D47E6E30082D8B2 /* FluidR3 GM2-2.SF2 in Resources */,
 				B0E9F6BF1B5D52950035EEBA /* .travis.yml in Resources */,
+				B037FF561FCDA6BF00BC217D /* .swift-version in Resources */,
 				B0E9F6BD1B5D52950035EEBA /* .gitignore in Resources */,
+				B037FF571FCDA6BF00BC217D /* fastlane in Resources */,
 				B0099CD91D47E7100082D8B2 /* chromatic2.mid in Resources */,
+				B037FF581FCDA6BF00BC217D /* .swiftlint.yml in Resources */,
 				B0E9F6BB1B5D52950035EEBA /* LICENSE in Resources */,
 				B0E9F6C71B5D52950035EEBA /* LaunchScreen.storyboard in Resources */,
 				B09AD28C1C6B71DC0050DB1D /* .jazzy.yaml in Resources */,
@@ -291,6 +304,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		B037FF591FCDA75B00BC217D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
 		B05023211C6A930000ACED32 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -302,7 +328,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "PATH=$(bash -l -c 'echo $PATH')\nexport TERM=tty\n#jazzy\n\n#jazzy --clean --author \"Gene De Lisa\" --author_url \"http://rockhoppertech.com/blog\" --module MIDISynth --min-acl internal --readme ./README.md --github_url \"https://github.com/genedelisa/MIDISynth\" --output docs/swift_output\n";
+			shellScript = "PATH=$(bash -l -c 'echo $PATH')\nexport TERM=tty\njazzy --clean\n\n#jazzy --clean --author \"Gene De Lisa\" --author_url \"http://rockhoppertech.com/blog\" --module MIDISynth --min-acl internal --readme ./README.md --github_url \"https://github.com/genedelisa/MIDISynth\" --output docs/swiftDocs\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -381,14 +407,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -428,14 +460,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -470,7 +508,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rockhoppertech.MIDISynth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -483,7 +522,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rockhoppertech.MIDISynth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -496,7 +536,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rockhoppertech.MIDISynthTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MIDISynth.app/MIDISynth";
 			};
 			name = Debug;
@@ -510,7 +551,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rockhoppertech.MIDISynthTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MIDISynth.app/MIDISynth";
 			};
 			name = Release;

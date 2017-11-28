@@ -11,6 +11,7 @@ import Foundation
 import AudioToolbox
 import CoreAudio
 
+// swiftlint:disable function_body_length
 
 /// # A Core Audio MIDISynth `AudioUnit` example.
 /// This will add a polyphonic `kAudioUnitSubType_MIDISynth` audio unit to the `AUGraph`.
@@ -18,7 +19,7 @@ import CoreAudio
 /// - author: Gene De Lisa
 /// - copyright: 2016 Gene De Lisa
 /// - date: February 2016
-class AudioUnitMIDISynth : NSObject {
+class AudioUnitMIDISynth: NSObject {
     
     var processingGraph: AUGraph?
     var midisynthNode   = AUNode()
@@ -73,11 +74,11 @@ class AudioUnitMIDISynth : NSObject {
         AudioUtils.CheckError(status)
         
         
-        let synthOutputElement:AudioUnitElement = 0
-        let ioUnitInputElement:AudioUnitElement = 0
+        let synthOutputElement: AudioUnitElement = 0
+        let ioUnitInputElement: AudioUnitElement = 0
         
         status = AUGraphConnectNodeInput(self.processingGraph!,
-            self.midisynthNode, synthOutputElement, // srcnode, SourceOutputNumber
+                                         self.midisynthNode, synthOutputElement, // srcnode, SourceOutputNumber
             self.ioNode, ioUnitInputElement) // destnode, DestInputNumber
         
         AudioUtils.CheckError(status)
@@ -89,7 +90,7 @@ class AudioUnitMIDISynth : NSObject {
             componentType: OSType(kAudioUnitType_Output),
             componentSubType: OSType(kAudioUnitSubType_RemoteIO),
             componentManufacturer: OSType(kAudioUnitManufacturer_Apple),
-            componentFlags: 0,componentFlagsMask: 0)
+            componentFlags: 0, componentFlagsMask: 0)
         let status = AUGraphAddNode(self.processingGraph!, &cd, &ioNode)
         AudioUtils.CheckError(status)
     }
@@ -100,19 +101,23 @@ class AudioUnitMIDISynth : NSObject {
             componentType: OSType(kAudioUnitType_MusicDevice),
             componentSubType: OSType(kAudioUnitSubType_MIDISynth),
             componentManufacturer: OSType(kAudioUnitManufacturer_Apple),
-            componentFlags: 0,componentFlagsMask: 0)
+            componentFlags: 0, componentFlagsMask: 0)
         let status = AUGraphAddNode(self.processingGraph!, &cd, &midisynthNode)
         AudioUtils.CheckError(status)
     }
     
     
-    
+    let soundFontFileName = "FluidR3 GM2-2"
+    let soundFontFileExt = "SF2"
+    // there is a problem with drop out using this font
+    //let soundFontFileName = "GeneralUser GS v1.471"
+    //let soundFontFileExt = "sf2"
     
     /// This will load the default sound font and set the synth unit's property.
     /// - postcondition: `self.midisynthUnit` will have it's sound font url set.
-    func loadMIDISynthSoundFont()  {
+    func loadMIDISynthSoundFont() {
         
-        if var bankURL = Bundle.main.url(forResource: "FluidR3 GM2-2", withExtension: "SF2")  {
+        if var bankURL = Bundle.main.url(forResource: soundFontFileName, withExtension: soundFontFileExt) {
             
             let status = AudioUnitSetProperty(
                 self.midisynthUnit!,
@@ -223,7 +228,7 @@ class AudioUnitMIDISynth : NSObject {
     }
     
     /// Send a note on message using patch1 on channel 0
-    func playPatch1On()    {
+    func playPatch1On() {
         
         let channel = UInt32(0)
         let noteCommand = UInt32(0x90 | channel)
@@ -239,7 +244,7 @@ class AudioUnitMIDISynth : NSObject {
     }
     
     /// Send a note off message using patch1 on channel 0
-    func playPatch1Off()    {
+    func playPatch1Off() {
         let channel = UInt32(0)
         let noteCommand = UInt32(0x80 | channel)
         var status = OSStatus(noErr)
@@ -248,7 +253,7 @@ class AudioUnitMIDISynth : NSObject {
     }
     
     /// Send a note on message using patch2 on channel 0
-    func playPatch2On()    {
+    func playPatch2On() {
         
         let channel = UInt32(0)
         let noteCommand = UInt32(0x90 | channel)
@@ -264,7 +269,7 @@ class AudioUnitMIDISynth : NSObject {
     }
     
     /// Send a note off message using patch2 on channel 0
-    func playPatch2Off()    {
+    func playPatch2Off() {
         let channel = UInt32(0)
         let noteCommand = UInt32(0x80 | channel)
         var status = OSStatus(noErr)
@@ -280,7 +285,7 @@ class AudioUnitMIDISynth : NSObject {
     /// - returns: a `MusicSequence`
     func createMusicSequence() -> MusicSequence {
         
-        var musicSequence:MusicSequence?
+        var musicSequence: MusicSequence?
         var status = NewMusicSequence(&musicSequence)
         if status != noErr {
             print("\(#line) bad status \(status) creating sequence")
@@ -316,12 +321,12 @@ class AudioUnitMIDISynth : NSObject {
         
         // now make some notes and put them on the track
         var beat = MusicTimeStamp(0.0)
-        for i:UInt8 in 60...72 {
+        for i: UInt8 in 60...72 {
             var mess = MIDINoteMessage(channel: channel,
-                note: i,
-                velocity: 64,
-                releaseVelocity: 0,
-                duration: 1.0 )
+                                       note: i,
+                                       velocity: 64,
+                                       releaseVelocity: 0,
+                                       duration: 1.0 )
             status = MusicTrackNewMIDINoteEvent(track!, beat, &mess)
             if status != noErr {
                 print("creating new midi note event \(status)")
@@ -358,13 +363,13 @@ class AudioUnitMIDISynth : NSObject {
         }
         
         beat = MusicTimeStamp(3.0)
-        for i:UInt8 in 60...72 {
+        for i: UInt8 in 60...72 {
             var mess = MIDINoteMessage(channel: channel,
-                note: i,
-                velocity: 36,
-                releaseVelocity: 0,
-                
-                duration: 1.0 )
+                                       note: i,
+                                       velocity: 36,
+                                       releaseVelocity: 0,
+                                       
+                                       duration: 1.0 )
             status = MusicTrackNewMIDINoteEvent(track!, beat, &mess)
             if status != OSStatus(noErr) {
                 print("creating new midi note event \(status)")
@@ -388,9 +393,9 @@ class AudioUnitMIDISynth : NSObject {
     /// - throws: Nothing, but it should
     /// - todo: create an `ErrorType` ennum
     /// - returns: a `MusicPlayer`
-    func createPlayer(_ musicSequence:MusicSequence) -> MusicPlayer {
-        var musicPlayer:MusicPlayer?
-
+    func createPlayer(_ musicSequence: MusicSequence) -> MusicPlayer {
+        var musicPlayer: MusicPlayer?
+        
         var status = NewMusicPlayer(&musicPlayer)
         if status != OSStatus(noErr) {
             print("bad status \(status) creating player")
@@ -415,7 +420,7 @@ class AudioUnitMIDISynth : NSObject {
     /// - todo: create an `ErrorType` ennum
     func musicPlayerPlay() {
         var status = noErr
-        var playing:DarwinBoolean = false
+        var playing: DarwinBoolean = false
         status = MusicPlayerIsPlaying(musicPlayer, &playing)
         if playing != false {
             status = MusicPlayerStop(musicPlayer)

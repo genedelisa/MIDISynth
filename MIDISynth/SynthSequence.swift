@@ -12,6 +12,8 @@ import AVFoundation
 import AudioToolbox
 import CoreAudio
 
+// swiftlint:disable function_body_length
+
 /// # An AVFoundation example to test our `AVAudioUnit`.
 ///
 ///
@@ -20,15 +22,22 @@ import CoreAudio
 /// - author: Gene De Lisa
 /// - copyright: 2016 Gene De Lisa
 /// - date: February 2016
-class SynthSequence : NSObject {
+class SynthSequence: NSObject {
     
     var engine: AVAudioEngine!
     
-    var sequencer:AVAudioSequencer!
+    var sequencer: AVAudioSequencer!
     
-    var midiSynth:AVAudioUnitMIDISynth!
+    var midiSynth: AVAudioUnitMIDISynth!
     
     var patches = [UInt32]()
+    
+    let soundFontFileName = "FluidR3 GM2-2"
+    let soundFontFileExt = "SF2"
+    // there is a problem with a drop out using this soundfont
+    //let soundFontFileName = "GeneralUser GS v1.471"
+    //let soundFontFileExt = "sf2"
+
     
     override init() {
         super.init()
@@ -38,7 +47,7 @@ class SynthSequence : NSObject {
 
         midiSynth = AVAudioUnitMIDISynth()
         
-        if let bankURL = Bundle.main.url(forResource: "FluidR3 GM2-2", withExtension: "SF2")  {
+        if let bankURL = Bundle.main.url(forResource: soundFontFileName, withExtension: soundFontFileExt) {
             midiSynth.loadMIDISynthSoundFont(bankURL)
             print("loading from url")
         } else {
@@ -157,10 +166,10 @@ class SynthSequence : NSObject {
     ///  - parameter musicSequence: the `MusicSequence` that will be converted.
     ///
     ///  - returns: the `NSData` instance.
-    func sequenceData(_ musicSequence:MusicSequence) -> Data? {
+    func sequenceData(_ musicSequence: MusicSequence) -> Data? {
         var status = OSStatus(noErr)
         
-        var data:Unmanaged<CFData>?
+        var data: Unmanaged<CFData>?
         status = MusicSequenceFileCreateData(musicSequence,
             MusicSequenceFileTypeID.midiType,
             MusicSequenceFileFlags.eraseFile,
@@ -170,7 +179,7 @@ class SynthSequence : NSObject {
             return nil
         }
         
-        let ns:Data = data!.takeUnretainedValue() as Data
+        let ns: Data = data!.takeUnretainedValue() as Data
         data?.release()
         return ns
     }
@@ -180,14 +189,14 @@ class SynthSequence : NSObject {
     ///  - returns: The `MusicSequence`.
     func createMusicSequence() -> MusicSequence {
         
-        var musicSequence : MusicSequence? = nil
+        var musicSequence: MusicSequence? = nil
         var status = NewMusicSequence(&musicSequence)
         if status != noErr {
             print("\(#line) bad status \(status) creating sequence")
         }
         
         // add a track
-        var track : MusicTrack? = nil
+        var track: MusicTrack? = nil
         status = MusicSequenceNewTrack(musicSequence!, &track)
         if status != noErr {
             print("error creating track \(status)")
@@ -216,7 +225,7 @@ class SynthSequence : NSObject {
         
         // now make some notes and put them on the track
         var beat = MusicTimeStamp(0.0)
-        for i:UInt8 in 60...72 {
+        for i: UInt8 in 60...72 {
             var mess = MIDINoteMessage(channel: channel,
                 note: i,
                 velocity: 64,
@@ -258,7 +267,7 @@ class SynthSequence : NSObject {
         }
         
         beat = MusicTimeStamp(3.0)
-        for i:UInt8 in 60...72 {
+        for i: UInt8 in 60...72 {
             var mess = MIDINoteMessage(channel: channel,
                 note: i,
                 velocity: 36,
@@ -342,23 +351,23 @@ class SynthSequence : NSObject {
         }
     }
     
-    //MARK: - Notifications
+    // MARK: - Notifications
     
     func addObservers() {
         NotificationCenter.default.addObserver(self,
-            selector:#selector(SynthSequence.engineConfigurationChange(_:)),
-            name:NSNotification.Name.AVAudioEngineConfigurationChange,
-            object:engine)
+            selector: #selector(SynthSequence.engineConfigurationChange(_:)),
+            name: NSNotification.Name.AVAudioEngineConfigurationChange,
+            object: engine)
         
         NotificationCenter.default.addObserver(self,
-            selector:#selector(SynthSequence.sessionInterrupted(_:)),
-            name:NSNotification.Name.AVAudioSessionInterruption,
-            object:engine)
+            selector: #selector(SynthSequence.sessionInterrupted(_:)),
+            name: NSNotification.Name.AVAudioSessionInterruption,
+            object: engine)
         
         NotificationCenter.default.addObserver(self,
-            selector:#selector(SynthSequence.sessionRouteChange(_:)),
-            name:NSNotification.Name.AVAudioSessionRouteChange,
-            object:engine)
+            selector: #selector(SynthSequence.sessionRouteChange(_:)),
+            name: NSNotification.Name.AVAudioSessionRouteChange,
+            object: engine)
     }
     
     func removeObservers() {
@@ -377,34 +386,35 @@ class SynthSequence : NSObject {
     
     
     // MARK: notification callbacks
-    func engineConfigurationChange(_ notification:Notification) {
+    @objc func engineConfigurationChange(_ notification: Notification) {
         print("engineConfigurationChange")
     }
     
-    func sessionInterrupted(_ notification:Notification) {
+    @objc func sessionInterrupted(_ notification: Notification) {
         print("audio session interrupted")
         if let engine = notification.object as? AVAudioEngine {
             engine.stop()
         }
         
-        if let userInfo = (notification as NSNotification).userInfo as? Dictionary<String,AnyObject?> {
-            let reason = userInfo[AVAudioSessionInterruptionTypeKey] as! AVAudioSessionInterruptionType
-            switch reason {
-            case .began:
-                print("began")
-            case .ended:
-                print("ended")
+        if let userInfo = (notification as NSNotification).userInfo as? [String: AnyObject?] {
+            if let reason = userInfo[AVAudioSessionInterruptionTypeKey] as? AVAudioSessionInterruptionType {
+                switch reason {
+                case .began:
+                    print("began")
+                case .ended:
+                    print("ended")
+                }
             }
         }
     }
     
-    func sessionRouteChange(_ notification:Notification) {
+    @objc func sessionRouteChange(_ notification: Notification) {
         print("sessionRouteChange")
         if let engine = notification.object as? AVAudioEngine {
             engine.stop()
         }
         
-        if let userInfo = (notification as NSNotification).userInfo as? Dictionary<String,AnyObject?> {
+        if let userInfo = (notification as NSNotification).userInfo as? [String: AnyObject?] {
             
             if let reason = userInfo[AVAudioSessionRouteChangeReasonKey] as? AVAudioSessionRouteChangeReason {
                 
@@ -423,7 +433,7 @@ class SynthSequence : NSObject {
             }
             
             let previous = userInfo[AVAudioSessionRouteChangePreviousRouteKey]
-            print("audio session route change previous \(previous)")
+            print("audio session route change previous \(String(describing: previous))")
         }
     }
     

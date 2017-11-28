@@ -1,0 +1,6 @@
+scheme "MIDISynth"
+clean true
+code_coverage true
+device "iPhone 8"
+skip_slack true
+slack_only_on_failure true

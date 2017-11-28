@@ -13,4 +13,12 @@ script:
 - xctool -project MIDISynth.xcodeproj  -scheme "MIDISynth" -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 6" ONLY_ACTIVE_ARCH=NO test | xcpretty -c
 
 
+# - xcodebuild -scheme MIDISynth -project MIDISynth.xcodeproj -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6S,OS=9.1' build test
+
+# - xcodebuild -scheme MIDISynth -workspace MIDISynth.xcworkspace -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6S,OS=9.1' build test
+
+after_success:
+- bash <(curl -s https://codecov.io/bash)
+
+
 # http://docs.travis-ci.com/user/languages/objective-c/

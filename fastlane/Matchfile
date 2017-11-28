@@ -1,0 +1,4 @@
+git_url "/Users/gene/Dropbox/git/MIDISynth.git"
+#git_url "git@github.com:acastSthlm/ios-certificates.git"
+
+type "development" # The default type, can be: appstore, adhoc or development

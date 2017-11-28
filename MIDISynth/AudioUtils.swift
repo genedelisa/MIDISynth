@@ -10,6 +10,8 @@ import Foundation
 import AudioToolbox
 import CoreAudio
 
+// swiftlint:disable function_body_length
+
 #if os(OSX)
     // for UTCreateStringForOSType
     import CoreServices
@@ -34,7 +36,7 @@ import AVFoundation
 /// - date: February 2016
 open class AudioUtils {
     
-    fileprivate init(){
+    fileprivate init() {
     }
     
     
@@ -93,13 +95,16 @@ open class AudioUtils {
         var n = 0
         var r = ""
         
-        if s.characters.count > 4 {
-            let startIndex = s.characters.index(s.startIndex, offsetBy: 4)
-            r = s.substring(from: startIndex)
+        if s.count > 4 {
+            let startIndex = s.index(s.startIndex, offsetBy: 4)
+//            r = s.substring(from: startIndex)
+            r = String(s[startIndex...])
         } else {
             r = s + "    "
-            let startIndex = s.characters.index(s.startIndex, offsetBy: 4)
-            r = r.substring(to: startIndex)
+            let startIndex = s.index(s.startIndex, offsetBy: 4)
+//            r = r.substring(to: startIndex)
+            r = String(r[...startIndex])
+
         }
         
         for UniCodeChar in r.unicodeScalars {
@@ -151,7 +156,7 @@ open class AudioUtils {
     ///
     /// - parameter error: The status to check.
     /// - todo: Finish this for tvOS
-    class func CheckError(status:OSStatus) {
+    class func CheckError(status: OSStatus) {
     if status == noErr {
     print("no error")
     return
@@ -162,7 +167,7 @@ open class AudioUtils {
     ///  Print a description of the status code to stdout if it's an error.
     ///
     ///  - parameter status: the status to check.
-    class func CheckError(_ status:OSStatus) {
+    class func CheckError(_ status: OSStatus) {
         
         if status == noErr {
             return
@@ -172,7 +177,7 @@ open class AudioUtils {
         print("error chars '\(s)'")
         
         
-        switch(OSStatus(status)) {
+        switch status {
             // AudioToolbox
         case kAUGraphErr_NodeNotFound:
             print("kAUGraphErr_NodeNotFound")
@@ -294,7 +299,7 @@ open class AudioUtils {
             print("kAudioUnitErr_InvalidFile")
             
         case kAudioUnitErr_FormatNotSupported :
-            print("kAudioUnitErr_FormatNotSupported");
+            print("kAudioUnitErr_FormatNotSupported")
             
         case kAudioUnitErr_Uninitialized:
             print("kAudioUnitErr_Uninitialized")

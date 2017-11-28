@@ -9,8 +9,7 @@
 import Foundation
 import AVFoundation
 
-
- /// #An AVAudioUnit example.
+ /// # An AVAudioUnit example.
  ///
  /// A multi-timbral implementation of `AVAudioUnitMIDIInstrument` as an `AVAudioUnit`.
  /// This will use the polyphonic `kAudioUnitSubType_MIDISynth` audio unit.
@@ -38,13 +37,23 @@ class AVAudioUnitMIDISynth: AVAudioUnitMIDIInstrument {
         description.componentFlagsMask    = 0
         
         super.init(audioComponentDescription: description)
+
+        //name parameter is in the form "Company Name:Unit Name"
+        //AUAudioUnit.registerSubclass(AVAudioUnitMIDISynth.self, as: description, name: "foocom:myau", version: 1)
+
     }
     
     
+    let soundFontFileName = "FluidR3 GM2-2"
+    let soundFontFileExt = "SF2"
+    // there is a problem with a drop out using this soundfont
+    //let soundFontFileName = "GeneralUser GS v1.471"
+    //let soundFontFileExt = "sf2"
+    
     /// Loads the default sound font.
     /// If the file is not found, halt with an error message.
-    func loadMIDISynthSoundFont()  {
-        guard let bankURL = Bundle.main.url(forResource: "FluidR3 GM2-2", withExtension: "SF2")   else {
+    func loadMIDISynthSoundFont() {
+        guard let bankURL = Bundle.main.url(forResource: soundFontFileName, withExtension: soundFontFileExt)   else {
             fatalError("Get the default sound font URL correct!")
         }
         
@@ -54,7 +63,7 @@ class AVAudioUnitMIDISynth: AVAudioUnitMIDIInstrument {
     
     /// Loads the specified sound font.
     /// - parameter bankURL: A URL to the sound font.
-    func loadMIDISynthSoundFont(_ bankURL:URL)  {
+    func loadMIDISynthSoundFont(_ bankURL: URL) {
         var bankURL = bankURL
         
         let status = AudioUnitSetProperty(
@@ -82,7 +91,7 @@ class AVAudioUnitMIDISynth: AVAudioUnitMIDIInstrument {
      /// - precondition: the graph must be initialized
      ///
      /// [Doug's post](http://prod.lists.apple.com/archives/coreaudio-api/2016/Jan/msg00018.html)
-    func loadPatches(_ patches:[UInt32]) throws {
+    func loadPatches(_ patches: [UInt32]) throws {
         
         if let e = engine {
             if !e.isRunning {

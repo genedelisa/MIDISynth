@@ -1,0 +1,3 @@
+username "genedelisa@gmail.com" # the iTunes Connect login email address
+
+copyright "#{Time.now.year} Gene De Lisa"
