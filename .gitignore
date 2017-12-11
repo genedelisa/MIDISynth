@@ -3,6 +3,7 @@
 *.SF
 *.SF2
 
+screenshots
 docs/swiftDocs/*
 
 ### Xcode ###
