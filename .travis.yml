@@ -9,7 +9,7 @@ env:
 before_install:
 - brew update
 - brew outdated xctool || brew upgrade xctool
-_ brew install swiftlint || true
+- brew install swiftlint || true
 - gem install xcpretty -N
 
 script:
