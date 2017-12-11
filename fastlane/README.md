@@ -12,9 +12,9 @@ xcode-select --install
 
 <table width="100%" >
 <tr>
-<th width="33%"><a href="http://brew.sh">Homebrew</a></td>
-<th width="33%">Installer Script</td>
-<th width="33%">Rubygems</td>
+<th width="33%"><a href="http://brew.sh">Homebrew</a></th>
+<th width="33%">Installer Script</th>
+<th width="33%">RubyGems</th>
 </tr>
 <tr>
 <td width="33%" align="center">macOS</td>
@@ -35,6 +35,11 @@ xcode-select --install
 fastlane ios test
 ```
 Runs all the tests
+### ios runtestflight
+```
+fastlane ios runtestflight
+```
+Testflight
 ### ios beta
 ```
 fastlane ios beta
@@ -52,11 +57,11 @@ Deploy a new version to the App Store
 fastlane ios screens
 ```
 Creates new screenshots and uploads them to iTunes Connect
-### ios snappy
+### ios runlint
 ```
-fastlane ios snappy
+fastlane ios runlint
 ```
-Creates new screenshots 
+Run Swiftlint
 
 ----
 

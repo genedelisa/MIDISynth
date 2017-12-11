@@ -9,6 +9,9 @@
 import Foundation
 import AVFoundation
 
+// swiftlint:disable line_length
+
+
  /// # An AVAudioUnit example.
  ///
  /// A multi-timbral implementation of `AVAudioUnitMIDIInstrument` as an `AVAudioUnit`.

@@ -13,6 +13,10 @@ import AudioToolbox
 import CoreAudio
 
 // swiftlint:disable function_body_length
+// swiftlint:disable type_body_length
+// swiftlint:disable line_length
+// swiftlint:disable file_length
+
 
 /// # An AVFoundation example to test our `AVAudioUnit`.
 ///

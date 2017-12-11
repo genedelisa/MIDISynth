@@ -12,6 +12,10 @@ import AudioToolbox
 import CoreAudio
 
 // swiftlint:disable function_body_length
+// swiftlint:disable type_body_length
+// swiftlint:disable file_length
+// swiftlint:disable line_length
+
 
 /// # A Core Audio MIDISynth `AudioUnit` example.
 /// This will add a polyphonic `kAudioUnitSubType_MIDISynth` audio unit to the `AUGraph`.

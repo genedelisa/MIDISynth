@@ -11,6 +11,9 @@ import AudioToolbox
 import CoreAudio
 
 // swiftlint:disable function_body_length
+// swiftlint:disable type_body_length
+// swiftlint:disable file_length
+
 
 #if os(OSX)
     // for UTCreateStringForOSType

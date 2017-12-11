@@ -1,17 +1,30 @@
 # file: .travis.yml
 language: objective-c
-osx_image: xcode8
+osx_image: xcode9.2
 xcode_project: MIDISynth
+
+env:
+- LC_CTYPE=en_US.UTF-8 LANG=en_US.UTF-8
 
 before_install:
 - brew update
 - brew outdated xctool || brew upgrade xctool
+_ brew install swiftlint || true
 - gem install xcpretty -N
 
 script:
 
-- xctool -project MIDISynth.xcodeproj  -scheme "MIDISynth" -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 6" ONLY_ACTIVE_ARCH=NO test | xcpretty -c
+    - set -o pipefail
 
+    - bundle exec fastlane ios test
+
+#    - xctool -project MIDISynth.xcodeproj  -scheme "MIDISynth" -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 8" ONLY_ACTIVE_ARCH=NO test | xcpretty -c
+
+    - swiftlint
+
+- yarn danger
+
+#    - xctool -project MIDISynth.xcodeproj  -scheme "MIDISynth" -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 8" ONLY_ACTIVE_ARCH=NO test | xcpretty -c
 
 # - xcodebuild -scheme MIDISynth -project MIDISynth.xcodeproj -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6S,OS=9.1' build test
 

@@ -9,6 +9,7 @@
 import Foundation
 import AVFoundation
 
+// swiftlint:disable line_length
 
 /// # An AVAudioUnit example.
 ///

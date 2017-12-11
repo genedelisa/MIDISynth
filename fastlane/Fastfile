@@ -11,87 +11,164 @@
 
 # This is the minimum version number required.
 # Update this, if you use features of a newer version
-fastlane_version "2.37.0"
+fastlane_version "2.68.2"
 
 default_platform :ios
 
 platform :ios do
-  before_all do
-     ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
-    # cocoapods
-  end
 
-  desc "Runs all the tests"
-  lane :test do
-    scan
-  end
+    before_all do
+        ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
+        ENV["SCAN_SLACK_CHANNEL"] = '#build'
+        # cocoapods
+    end
 
-  desc "Submit a new Beta Build to Apple TestFlight"
-  desc "This will also make sure the profile is up to date"
-  lane :beta do
 
-   increment_build_number
+    # ---------------------------
+    # Tests
+    # ---------------------------
+    desc "Runs all the tests"
+        lane :test do
+            scan
+        end
 
-  #   build your iOS app
-    gym(
-       scheme: "MIDISynth",
-      # export_method: "ad-hoc"
-    )
 
-    # match(type: "appstore") # more information: https://codesigning.guide
-    #gym # Build your app - more options available
+    # ---------------------------
+    # Testflight
+    # ---------------------------
+    desc "Testflight"
+        lane :runtestflight do
 
-    # pilot will Upload a new binary to iTunes Connect for TestFlight beta testing
-# pilot
+        # ---------------------------
+        # Make sure everything is checked in
+        # ---------------------------
+        ensure_git_status_clean
 
-    # sh "your_script.sh"
-    # You can also use other beta testing services here (run `fastlane actions`)
-  end
+        # ---------------------------
+        # We need to be on the release branch
+        # ---------------------------
+        ensure_git_branch(branch: 'release')
 
-  desc "Deploy a new version to the App Store"
-  lane :release do
-    # match(type: "appstore")
-    # snapshot
-    gym # Build your app - more options available
-    deliver(force: true)
-    # frameit
-  end
+        # ---------------------------
+        # Increment version numbers.
+        # ---------------------------
+        increment_version_number
+        version = get_version_number()
+        increment_build_number(build_number: version)
 
-  # You can define as many lanes as you want
+        #---------------------------
+        # Commit version bump
+        #---------------------------
+        commit_version_bump(message: 'New Version', force: true)
 
- desc "Creates new screenshots and uploads them to iTunes Connect"
-  lane :screens do
-    cocoapods
-    match(app_identifier: "com.rockhoppertech.MIDISynth", type: "development")
-    snapshot
-    frameit
-    #deliver(app: 925311796, app_identifier: "com.acast.app.native.production", skip_metadata: true, force: true)
-  end
+        #---------------------------
+        # Build
+        #---------------------------
+        gym(clean: true, output_directory: "/tmp", scheme: "App-Release", codesigning_identity: "iOS Distribution: Gene De Lisa")
 
- desc "Creates new screenshots "
- lane :snappy do |options|
-   snapshot(
-     #project: 'Example.xcodeproj',
-     scheme: 'MIDISynthUITests',
-     # devices: ['iPhone 6s', 'iPad Air'],
-     output_simulator_logs: true
-   )
- end
+        #---------------------------
+        # Upload to TestFlight
+        #---------------------------
+        pilot(skip_submission: true, username: "genedelisa@gmail.com")
 
-  after_all do |lane|
-    # This block is called, only if the executed lane was successful
+        #---------------------------
+        # Tag the submit
+        #---------------------------
+        git_tag = "Version_" + version
+        add_git_tag(tag: git_tag)
 
-     slack(
-       message: "Successfully deployed new App Update."
-     )
-  end
+        #---------------------------
+        # Push to GitHub
+        #---------------------------
+        push_to_git_remote(remote: 'origin', local_branch: 'release', remote_branch: 'release', force: false)
 
-  error do |lane, exception|
-     slack(
-       message: exception.message,
-       success: false
-     )
-  end
+        #---------------------------
+        # Clean up our files
+        #---------------------------
+        clean_build_artifacts
+    end
+
+
+    # ---------------------------
+    # testfilight beta
+    # ---------------------------
+    desc "Submit a new Beta Build to Apple TestFlight"
+    desc "This will also make sure the profile is up to date"
+        lane :beta do
+
+            increment_build_number
+
+            # match(type: "appstore") # more information: https://codesigning.guide
+
+            # build your iOS app
+            gym(scheme: "MIDISynth")
+            # gym(scheme: "Docs")
+
+            # pilot will Upload a new binary to iTunes Connect for TestFlight beta testing
+            # pilot
+        end
+
+    # ---------------------------
+    # Release
+    # ---------------------------
+    desc "Deploy a new version to the App Store"
+        lane :release do
+            # match(type: "appstore")
+            # snapshot
+            gym # Build your app - more options available
+            deliver(force: true)
+            # frameit
+    end
+
+    # ---------------------------
+    # Screen shots with frames
+    # ---------------------------
+    desc "Creates new screenshots and uploads them to iTunes Connect"
+        lane :screens do
+            #cocoapods
+            #match(app_identifier: "com.rockhoppertech.MIDISynth", type: "development")
+            snapshot
+            #snapshot(scheme: 'MIDISynthUITests',
+            #                devices: ['iPhone 6s', 'iPad Air'],
+            #                output_simulator_logs: true
+            #            )
+            frameit
+            #deliver(app: 123, app_identifier: "com.rockhoppertech.MIDISynth", skip_metadata: true, force: true)
+        end
+
+
+    # ---------------------------
+    # Lint
+    # ---------------------------
+    desc "Run Swiftlint"
+        lane :runlint do |options|
+            swiftlint(
+                mode: :lint, # SwiftLint mode: :lint (default) or :autocorrect
+                ignore_exit_status: true # Allow fastlane to continue even if SwiftLint returns a non-zero exit status
+            )
+        end
+
+    # ---------------------------
+    # After
+    # ---------------------------
+
+    after_all do |lane|
+        # This block is called, only if the executed lane was successful
+        slack(
+            message: "Successfully deployed new App Update."
+        )
+    end
+
+    # ---------------------------
+    # Error
+    # ---------------------------
+    error do |lane, exception|
+        slack(
+            message: exception.message,
+            success: false
+        )
+    end
+
 
 end
 

@@ -31,6 +31,10 @@
 		B08053C01C67811E0018095B /* AudioUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08053BF1C67811E0018095B /* AudioUtils.swift */; };
 		B09AD28C1C6B71DC0050DB1D /* .jazzy.yaml in Resources */ = {isa = PBXBuildFile; fileRef = B09AD28B1C6B71DC0050DB1D /* .jazzy.yaml */; };
 		B09AD28E1C6B72900050DB1D /* docs in Resources */ = {isa = PBXBuildFile; fileRef = B09AD28D1C6B72900050DB1D /* docs */; };
+		B0AD00521FDEC2F7001154A8 /* Gemfile in Resources */ = {isa = PBXBuildFile; fileRef = B0AD00511FDEC2F7001154A8 /* Gemfile */; };
+		B0AD00541FDECDBD001154A8 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = B0AD00531FDECDBD001154A8 /* CHANGELOG.md */; };
+		B0AD005C1FDED67F001154A8 /* MIDISynthUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD005B1FDED67F001154A8 /* MIDISynthUITests.swift */; };
+		B0AD00681FDEDB65001154A8 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD00671FDEDB65001154A8 /* SnapshotHelper.swift */; };
 		B0B68A181CEB9B7800C2FD88 /* AVAudioUnitDistortionEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B68A171CEB9B7800C2FD88 /* AVAudioUnitDistortionEffect.swift */; };
 		B0BD4E431C66312400B84077 /* AudioUnitMIDISynth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BD4E421C66312400B84077 /* AudioUnitMIDISynth.swift */; };
 		B0BD4E4D1C6695F900B84077 /* AVAudioUnitMIDISynth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BD4E4C1C6695F900B84077 /* AVAudioUnitMIDISynth.swift */; };
@@ -49,6 +53,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		B0AD005E1FDED67F001154A8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B0E9F6A81B5D52940035EEBA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B0E9F6AF1B5D52950035EEBA;
+			remoteInfo = MIDISynth;
+		};
 		B0E9F6CE1B5D52950035EEBA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B0E9F6A81B5D52940035EEBA /* Project object */;
@@ -67,8 +78,14 @@
 		B037FF551FCDA6BF00BC217D /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		B0390D091E9FAC07008A4371 /* GeneralUser GS v1.471.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GeneralUser GS v1.471.sf2"; sourceTree = "<group>"; };
 		B08053BF1C67811E0018095B /* AudioUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioUtils.swift; sourceTree = "<group>"; };
-		B09AD28B1C6B71DC0050DB1D /* .jazzy.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .jazzy.yaml; path = ../.jazzy.yaml; sourceTree = "<group>"; };
+		B09AD28B1C6B71DC0050DB1D /* .jazzy.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .jazzy.yaml; sourceTree = "<group>"; };
 		B09AD28D1C6B72900050DB1D /* docs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = docs; sourceTree = "<group>"; };
+		B0AD00511FDEC2F7001154A8 /* Gemfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Gemfile; sourceTree = "<group>"; };
+		B0AD00531FDECDBD001154A8 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		B0AD00591FDED67F001154A8 /* MIDISynthUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MIDISynthUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0AD005B1FDED67F001154A8 /* MIDISynthUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDISynthUITests.swift; sourceTree = "<group>"; };
+		B0AD005D1FDED67F001154A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B0AD00671FDEDB65001154A8 /* SnapshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		B0B68A171CEB9B7800C2FD88 /* AVAudioUnitDistortionEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioUnitDistortionEffect.swift; sourceTree = "<group>"; };
 		B0BD4E421C66312400B84077 /* AudioUnitMIDISynth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioUnitMIDISynth.swift; sourceTree = "<group>"; };
 		B0BD4E4C1C6695F900B84077 /* AVAudioUnitMIDISynth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioUnitMIDISynth.swift; sourceTree = "<group>"; };
@@ -92,6 +109,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B0AD00561FDED67F001154A8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B0E9F6AD1B5D52950035EEBA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -122,17 +146,28 @@
 			name = media;
 			sourceTree = "<group>";
 		};
+		B0AD005A1FDED67F001154A8 /* MIDISynthUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B0AD00671FDEDB65001154A8 /* SnapshotHelper.swift */,
+				B0AD005B1FDED67F001154A8 /* MIDISynthUITests.swift */,
+				B0AD005D1FDED67F001154A8 /* Info.plist */,
+			);
+			path = MIDISynthUITests;
+			sourceTree = "<group>";
+		};
 		B0E9F6A71B5D52940035EEBA = {
 			isa = PBXGroup;
 			children = (
-				B037FF531FCDA6BE00BC217D /* .swift-version */,
-				B037FF551FCDA6BF00BC217D /* .swiftlint.yml */,
+				B0AD00511FDEC2F7001154A8 /* Gemfile */,
+				B09AD28B1C6B71DC0050DB1D /* .jazzy.yaml */,
 				B037FF541FCDA6BF00BC217D /* fastlane */,
 				B09AD28D1C6B72900050DB1D /* docs */,
 				B0E9F6E01B5D55600035EEBA /* CoreMIDI.framework */,
 				B0E9F6DE1B5D55550035EEBA /* CoreAudio.framework */,
 				B0E9F6B21B5D52950035EEBA /* MIDISynth */,
 				B0E9F6D01B5D52950035EEBA /* MIDISynthTests */,
+				B0AD005A1FDED67F001154A8 /* MIDISynthUITests */,
 				B0E9F6B11B5D52950035EEBA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -142,6 +177,7 @@
 			children = (
 				B0E9F6B01B5D52950035EEBA /* MIDISynth.app */,
 				B0E9F6CD1B5D52950035EEBA /* MIDISynthTests.xctest */,
+				B0AD00591FDED67F001154A8 /* MIDISynthUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -169,7 +205,9 @@
 		B0E9F6B71B5D52950035EEBA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B09AD28B1C6B71DC0050DB1D /* .jazzy.yaml */,
+				B0AD00531FDECDBD001154A8 /* CHANGELOG.md */,
+				B037FF531FCDA6BE00BC217D /* .swift-version */,
+				B037FF551FCDA6BF00BC217D /* .swiftlint.yml */,
 				B0E9F6B81B5D52950035EEBA /* README.md */,
 				B0E9F6BA1B5D52950035EEBA /* LICENSE */,
 				B0E9F6BC1B5D52950035EEBA /* .gitignore */,
@@ -190,11 +228,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B0AD00581FDED67F001154A8 /* MIDISynthUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B0AD00621FDED67F001154A8 /* Build configuration list for PBXNativeTarget "MIDISynthUITests" */;
+			buildPhases = (
+				B0AD00551FDED67F001154A8 /* Sources */,
+				B0AD00561FDED67F001154A8 /* Frameworks */,
+				B0AD00571FDED67F001154A8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B0AD005F1FDED67F001154A8 /* PBXTargetDependency */,
+			);
+			name = MIDISynthUITests;
+			productName = MIDISynthUITests;
+			productReference = B0AD00591FDED67F001154A8 /* MIDISynthUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		B0E9F6AF1B5D52950035EEBA /* MIDISynth */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B0E9F6D61B5D52950035EEBA /* Build configuration list for PBXNativeTarget "MIDISynth" */;
 			buildPhases = (
-				B037FF591FCDA75B00BC217D /* ShellScript */,
+				B037FF591FCDA75B00BC217D /* Lint Script */,
 				B0E9F6AC1B5D52950035EEBA /* Sources */,
 				B0E9F6AD1B5D52950035EEBA /* Frameworks */,
 				B0E9F6AE1B5D52950035EEBA /* Resources */,
@@ -232,11 +288,18 @@
 		B0E9F6A81B5D52940035EEBA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = "Gene De Lisa";
 				TargetAttributes = {
 					B050231D1C6A92F500ACED32 = {
 						CreatedOnToolsVersion = 7.2;
+					};
+					B0AD00581FDED67F001154A8 = {
+						CreatedOnToolsVersion = 9.2;
+						DevelopmentTeam = 4UDK2944TW;
+						ProvisioningStyle = Automatic;
+						TestTargetID = B0E9F6AF1B5D52950035EEBA;
 					};
 					B0E9F6AF1B5D52950035EEBA = {
 						CreatedOnToolsVersion = 7.0;
@@ -267,15 +330,24 @@
 				B0E9F6AF1B5D52950035EEBA /* MIDISynth */,
 				B0E9F6CC1B5D52950035EEBA /* MIDISynthTests */,
 				B050231D1C6A92F500ACED32 /* Docs */,
+				B0AD00581FDED67F001154A8 /* MIDISynthUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B0AD00571FDED67F001154A8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B0E9F6AE1B5D52950035EEBA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0AD00521FDEC2F7001154A8 /* Gemfile in Resources */,
 				B0390D0A1E9FAC07008A4371 /* GeneralUser GS v1.471.sf2 in Resources */,
 				B0099CD71D47E6E30082D8B2 /* FluidR3 GM2-2.SF2 in Resources */,
 				B0E9F6BF1B5D52950035EEBA /* .travis.yml in Resources */,
@@ -288,6 +360,7 @@
 				B0E9F6C71B5D52950035EEBA /* LaunchScreen.storyboard in Resources */,
 				B09AD28C1C6B71DC0050DB1D /* .jazzy.yaml in Resources */,
 				B0E9F6C21B5D52950035EEBA /* Main.storyboard in Resources */,
+				B0AD00541FDECDBD001154A8 /* CHANGELOG.md in Resources */,
 				B0099CDB1D47E7880082D8B2 /* The Legend of Zelda - Koji Kondo - Main Theme (King Meteor).mid in Resources */,
 				B09AD28E1C6B72900050DB1D /* docs in Resources */,
 				B0E9F6C41B5D52950035EEBA /* Assets.xcassets in Resources */,
@@ -304,13 +377,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		B037FF591FCDA75B00BC217D /* ShellScript */ = {
+		B037FF591FCDA75B00BC217D /* Lint Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Lint Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -333,6 +407,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B0AD00551FDED67F001154A8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0AD005C1FDED67F001154A8 /* MIDISynthUITests.swift in Sources */,
+				B0AD00681FDEDB65001154A8 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B0E9F6AC1B5D52950035EEBA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -358,6 +441,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		B0AD005F1FDED67F001154A8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B0E9F6AF1B5D52950035EEBA /* MIDISynth */;
+			targetProxy = B0AD005E1FDED67F001154A8 /* PBXContainerItemProxy */;
+		};
 		B0E9F6CF1B5D52950035EEBA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B0E9F6AF1B5D52950035EEBA /* MIDISynth */;
@@ -396,6 +484,53 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		B0AD00601FDED67F001154A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4UDK2944TW;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = MIDISynthUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rockhoppertech.MIDISynthUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MIDISynth;
+			};
+			name = Debug;
+		};
+		B0AD00611FDED67F001154A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4UDK2944TW;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = MIDISynthUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rockhoppertech.MIDISynthUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MIDISynth;
 			};
 			name = Release;
 		};
@@ -503,6 +638,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 4UDK2944TW;
 				INFOPLIST_FILE = MIDISynth/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -510,6 +646,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -517,6 +654,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 4UDK2944TW;
 				INFOPLIST_FILE = MIDISynth/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -524,6 +662,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
@@ -565,6 +704,15 @@
 			buildConfigurations = (
 				B050231E1C6A92F500ACED32 /* Debug */,
 				B050231F1C6A92F500ACED32 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B0AD00621FDED67F001154A8 /* Build configuration list for PBXNativeTarget "MIDISynthUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B0AD00601FDED67F001154A8 /* Debug */,
+				B0AD00611FDED67F001154A8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
