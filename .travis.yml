@@ -21,7 +21,7 @@ script:
 
 
 after_success:
-- bash <(curl -s https://codecov.io/bash)
+- bash <(curl -s https://codecov.io/bash) -J 'MIDISynth'
 
 
 # http://docs.travis-ci.com/user/languages/objective-c/
